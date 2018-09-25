@@ -59,6 +59,7 @@
 #define SS_INIT_ALARM           -3
 #define SS_INIT_SHUTTLE         -4
 #define SS_INIT_LIGHTING        -5
+#define SS_INIT_CELLAUTO        -6
 #define SS_INIT_XENOARCH       -50
 #define SS_INIT_OPEN_SPACE    -150
 #define SS_INIT_BAY_LEGACY    -200
