@@ -50,4 +50,3 @@ about: Report a bug to help us improve gameplay
 
 ### Additional context
 <!-- Add any other context about the problem here. -->
-
