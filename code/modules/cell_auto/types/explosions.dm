@@ -11,6 +11,7 @@
 	light_color = "#ed9200"
 	plane = EFFECTS_BELOW_LIGHTING_PLANE
 	layer = FIRE_LAYER
+	color = "#ffc20c"
 
 	anchored = 1
 	mouse_opacity = 0
