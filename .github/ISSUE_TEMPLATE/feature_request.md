@@ -5,7 +5,7 @@ about: Suggest an idea
 ---
 
 **Is your idea related to a problem? Please describe.**
-A clear and concise description of what the problem is. [eg. I'm always frustrated when the clown honks.]
+A clear and concise description of what the problem is. [eg. I HATE when the clown honks.]
 
 **Describe the solution you'd like**
 A clear and concise description of what you want to happen. [eg. I want the clown horn to be removed.]
