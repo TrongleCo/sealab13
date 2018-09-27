@@ -1,53 +1,46 @@
 <!--
-	If a specific field doesn't apply, remove it!
-	Anything inside tags like these is a comment and will not be displayed in the final issue.
+	Anything inside tags like these is a comment and will not be displayed.
 	Be careful not to write inside them!
-	Joke or spammed issues can and will result in punishment.
 	
-	PUT YOUR ANSWERS ON THE BLANK LINES BELOW THE HEADERS 
-	(The lines with four #'s) 
+	Put your answers below the headers. They're preceded by three # signs
+	### Like this
 	Don't edit them or delete them it's part of the formatting
+
+	Please check if your issue has already been reported first.
+	If a specific field doesn't apply, remove it!
 -->
 
-#### Description of issue
+### Description
+<!-- A clear and concise description of what the bug is. -->
 
+### Expected behavior
+<!-- A clear and concise description of what you expected to happen. -->
 
-
-#### Difference between expected and actual behavior
-
-
-
-#### Steps to reproduce 
-
-
-
-#### Specific information for locating
-<!-- e.g. an object name, paste specific message outputs... -->
-
-
-
-#### Length of time in which bug has been known to occur
-<!--
-	Be specific if you approximately know the time it's been occurring
-	for—this can speed up finding the source. If you're not sure
-	about it, tell us too!
--->
-
-
-
-#### Client version, Server revision & Game ID
+### Client version, Server revision, Game ID
 <!-- Found with the "Show server revision" verb in the OOC tab in game. -->
 
+### Reproducibility
+<!--
+	Please check whatever applies.
+	Check these by writing an x inside the brackets, [ ] -> [x]
+	Don't forget to remove the space between the brackets, or it won't work!
+-->
+- [ ] Experienced only once
+- [ ] Reproducible more than once
+- [ ] Reproducible in multiple rounds
+- [ ] Reproducible by other players
+- [ ] Occurred less than 7 days ago
 
+### To Reproduce
+<!--
+	Steps to reproduce the behavior:
+	1. Go to '...'
+	2. Explode '...'
+	3. Click on '...'
+-->
 
-#### Issue bingo
+### Screenshots
+<!-- If applicable, add screenshots to help explain your problem. -->
 
-Please check whatever applies. More checkboxes checked increase your chances of the issue being looked at sooner.
-
-<!-- Check these by writing an x inside the [ ] (like this: [x])-->
-<!-- Don't forget to remove the space between the brackets, or it won't work! -->
-- [ ] Issue could be reproduced at least once
-- [ ] Issue could be reproduced by different players
-- [ ] Issue could be reproduced in multiple rounds
-- [ ] Issue happened in a recent (less than 7 days ago) round
-- [ ] [Couldn't find an existing issue about this](https://github.com/Baystation12/Baystation12/issues)
+### Additional context
+<!-- Add any other context about the problem here. -->

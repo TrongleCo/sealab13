@@ -1,3 +1,9 @@
+---
+name: Pull Request
+about: Use this for any new PRs
+
+---
+
 <!--
 	Anything inside tags like these is a comment and will not be displayed.
 	Be careful not to write inside them!
@@ -24,3 +30,4 @@ rscdel: Removed clown.
 
 ### Screenshots
 <!-- Add any relevant screenshots of the new features here -->
+
