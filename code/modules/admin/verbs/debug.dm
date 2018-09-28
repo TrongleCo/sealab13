@@ -572,3 +572,10 @@
 
 	images -= powernet_markers
 	QDEL_NULL_LIST(powernet_markers)
+
+/client/proc/advanced_wincall()
+	set category = "Debug"
+	set name = "Advanced WinCall"
+	set desc = "Allows you to open specific windows typically unavailable"
+
+	winset(src, null, "command=.command")
