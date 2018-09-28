@@ -1,6 +1,6 @@
 //TODO: Flash range does nothing currently
 
-proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impact_range, flash_range, adminlog = 1, z_transfer = 0)
+proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impact_range, flash_range, adminlog = 1, z_transfer = UP|DOWN)
 	src = null	// so we don't abort once src is deleted
 	spawn(0)
 		epicenter = get_turf(epicenter)
@@ -9,7 +9,17 @@ proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impa
 
 		// z-Level Stuff
 		if(z_transfer && (devastation_range > 0 || heavy_impact_range > 0))
-			explosionZ(epicenter, devastation_range, heavy_impact_range, light_impact_range, flash_range, z_transfer)
+			if(z_transfer & DOWN)
+				//start the child explosion, no admin log and no additional transfers
+				explosion(GetBelow(epicenter), max(devastation_range - 2, 0), max(heavy_impact_range - 2, 0), max(light_impact_range - 2, 0), max(flash_range - 2, 0), 0, 0)
+				if(devastation_range - 2 > 0 || heavy_impact_range - 2 > 0) //only transfer further if the explosion is still big enough
+					explosion(GetBelow(epicenter), max(devastation_range - 2, 0), max(heavy_impact_range - 2, 0), max(light_impact_range - 2, 0), max(flash_range - 2, 0), 0, 1)
+
+			if(z_transfer & UP)
+				//start the child explosion, no admin log and no additional transfers
+				explosion(GetAbove(epicenter), max(devastation_range - 2, 0), max(heavy_impact_range - 2, 0), max(light_impact_range - 2, 0), max(flash_range - 2, 0), 0, 0)
+				if(devastation_range - 2 > 0 || heavy_impact_range - 2 > 0) //only transfer further if the explosion is still big enough
+					explosion(GetAbove(epicenter), max(devastation_range - 2, 0), max(heavy_impact_range - 2, 0), max(light_impact_range - 2, 0), max(flash_range - 2, 0), 1, 0)
 
 		// We want sounds to be different depending on distance so we will manually do it ourselves.
 		// Calculate far explosion sound range. Only allow the sound effect for heavy/devastating explosions.
@@ -43,17 +53,3 @@ proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impa
 				Array.sense_explosion( epicenter.x, epicenter.y, epicenter.z, devastation_range, heavy_impact_range, light_impact_range, 0 )
 
 	return 1
-
-///// Z-Level Stuff
-proc/explosionZ(turf/epicenter, devastation_range, heavy_impact_range, light_impact_range, flash_range, z_transfer = UP|DOWN)
-	if(z_transfer & DOWN)
-		//start the child explosion, no admin log and no additional transfers
-		explosion(GetBelow(epicenter), max(devastation_range - 2, 0), max(heavy_impact_range - 2, 0), max(light_impact_range - 2, 0), max(flash_range - 2, 0), 0, 0)
-		if(devastation_range - 2 > 0 || heavy_impact_range - 2 > 0) //only transfer further if the explosion is still big enough
-			explosion(GetBelow(epicenter), max(devastation_range - 2, 0), max(heavy_impact_range - 2, 0), max(light_impact_range - 2, 0), max(flash_range - 2, 0), 0, 1)
-
-	if(z_transfer & UP)
-		//start the child explosion, no admin log and no additional transfers
-		explosion(GetAbove(epicenter), max(devastation_range - 2, 0), max(heavy_impact_range - 2, 0), max(light_impact_range - 2, 0), max(flash_range - 2, 0), 0, 0)
-		if(devastation_range - 2 > 0 || heavy_impact_range - 2 > 0) //only transfer further if the explosion is still big enough
-			explosion(GetAbove(epicenter), max(devastation_range - 2, 0), max(heavy_impact_range - 2, 0), max(light_impact_range - 2, 0), max(flash_range - 2, 0), 1, 0)
