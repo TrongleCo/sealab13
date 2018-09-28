@@ -1,4 +1,7 @@
 /mob/living/carbon/human/gib()
+	if((status_flags & GODMODE)) // godmode takes no damage!
+		return
+
 	for(var/obj/item/organ/I in internal_organs)
 		I.removed()
 		if(istype(loc,/turf))
@@ -17,6 +20,9 @@
 	gibs(loc, dna, null, species.get_flesh_colour(src), species.get_blood_colour(src))
 
 /mob/living/carbon/human/dust()
+	if((status_flags & GODMODE)) // godmode takes no damage!
+		return
+
 	if(species)
 		..(species.dusted_anim, species.remains_type)
 	else
@@ -77,6 +83,9 @@
 	handle_hud_list()
 
 /mob/living/carbon/human/proc/ChangeToHusk()
+	if((status_flags & GODMODE)) // godmode takes no damage!
+		return
+
 	if(HUSK in mutations)	return
 
 	if(f_style)
@@ -92,11 +101,17 @@
 	return
 
 /mob/living/carbon/human/proc/Drain()
+	if((status_flags & GODMODE)) // godmode takes no damage!
+		return
+
 	ChangeToHusk()
 	mutations |= HUSK
 	return
 
 /mob/living/carbon/human/proc/ChangeToSkeleton()
+	if((status_flags & GODMODE)) // godmode takes no damage!
+		return
+
 	if(SKELETON in src.mutations)	return
 
 	if(f_style)
