@@ -5,6 +5,9 @@
 
 //returns 1 if this mob has sufficient access to use this object
 /obj/proc/allowed(mob/M)
+	// admin ghosts can interact with anything they like
+	if(isaghost(M))
+		return 1
 	//check if it doesn't require any access at all
 	if(src.check_access(null))
 		return 1
