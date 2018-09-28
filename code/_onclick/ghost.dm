@@ -40,7 +40,12 @@
 		if(target_turf)
 			AltClickOn(target_turf)
 	else
-		A.attack_ghost(src)
+		if(check_rights(R_ADMIN|R_MOD))
+			A.attack_ai(src) // admins can interact with machinery
+			if(isobject(A, /obj/machinery))
+				investigate_log("[src.client] has opened [A.name]'s interface ([A.x],[A.y],[A.z])", src)
+		else
+			A.attack_ghost(src)
 
 // Oh by the way this didn't work with old click code which is why clicking shit didn't spam you
 /atom/proc/attack_ghost(mob/observer/ghost/user as mob)

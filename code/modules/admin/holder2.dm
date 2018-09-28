@@ -98,6 +98,9 @@ NOTE: It checks usr by default. Supply the "user" argument if you wish to check 
 		to_chat(usr, "<font color='red'>Error: Cannot proceed. They have more or equal rights to us.</font>")
 	return 0
 
+/proc/isaghost(mob/M)
+	return isobserver(M) && check_rights(R_ADMIN|R_MOD, TRUE, M.client)
+
 /client/proc/deadmin()
 	if(holder)
 		holder.disassociate()
