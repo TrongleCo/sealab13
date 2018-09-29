@@ -43,7 +43,8 @@
 		if(check_rights(R_ADMIN|R_MOD))
 			A.attack_ai(src) // admins can interact with machinery
 			if(isobject(A, /obj/machinery))
-				investigate_log("[src.client] has opened [A.name]'s interface ([A.x],[A.y],[A.z])", src)
+				world.log << "### [src.client] has opened [A.name]'s interface ([A.x],[A.y],[A.z])"
+				log_admin("[src.client] has opened [A.name]'s interface ([A.x],[A.y],[A.z])")
 		else
 			A.attack_ghost(src)
 

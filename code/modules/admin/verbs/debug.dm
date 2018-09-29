@@ -572,3 +572,40 @@
 
 	images -= powernet_markers
 	QDEL_NULL_LIST(powernet_markers)
+
+/client/proc/advanced_wincall()
+	set category = "Debug"
+	set name = "Advanced WinCall"
+	set desc = "Allows you to open specific windows typically unavailable"
+
+	winset(src, null, "command=.command")
+
+/client/proc/generate_cpu_graph()
+	set category = "Debug"
+	set name = "CPU Graph"
+	set desc = "Generates a graph of CPU and Tick Usage."
+
+	if(!check_rights(R_SERVER))    return
+	var/iterations = input("How many iterations do you want?", "iterations:") as num
+	message_admins("[src.ckey] is generating a CPU/Tick Usage graph.")
+	usr << "<b>Creating file and starting log.."
+	var/f_name = "[time2text(world.realtime,"YYYY-MM-DD-(hh-mm-ss)")]-[GLOB.clients.len]"
+	var/csv = file("data/graphs/csv/[f_name].csv")
+	csv << "Time,CPU,TICK"
+
+	var/c = iterations/10 // Stores a cached version so we don't calculate x/10 every loop
+	for(var/i = 1, i<=iterations; i++)
+		csv << "[world.time],[world.cpu],[world.tick_usage]"
+		if(!(i % c))
+			usr << "<b>\[CPU\] Collected [i]/[iterations] entries."
+		sleep(world.tick_lag)
+
+	usr << "<b>\[CPU\] Logs have been gathered - generating graph.</b>"
+
+	if(!shell("python scripts/graph.py '[f_name]'")) // returns 0 if run without error
+		usr << "<span class='notice'>Graph generated and saved on server as data/graph/[f_name].png</span>"
+		var/new_filename="data/graphs/[f_name].png"
+		usr << ftp(new_filename,"[f_name].png")	// would be nicer in a window but I'd prefer to save it localy
+		usr << file2text("data/graphs/data.txt")
+	else
+		usr << "<span class='warning'>An error occurred generating the graph, please contract a developer</span>"

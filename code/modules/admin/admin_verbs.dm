@@ -210,7 +210,9 @@ var/list/admin_verbs_debug = list(
 	/client/proc/cmd_analyse_health_context,
 	/client/proc/cmd_analyse_health_panel,
 	/client/proc/visualpower,
-	/client/proc/visualpower_remove
+	/client/proc/visualpower_remove,
+	/client/proc/advanced_wincall,
+	/client/proc/generate_cpu_graph
 	)
 
 var/list/admin_verbs_paranoid_debug = list(

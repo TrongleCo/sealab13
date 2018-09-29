@@ -195,4 +195,7 @@
 
 	var/valuestr = make_view_variables_value(value, varname)
 
+	if(value != initial(D.vars[varname]))
+		return "<li>[ecm]<font color='#8B008B'>[varname] = [valuestr]</font></li>"
+
 	return "<li>[ecm][varname] = [valuestr]</li>"

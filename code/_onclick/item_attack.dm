@@ -39,12 +39,17 @@ avoid code duplication. This includes items that may sometimes act as a standard
 
 /mob/living/attackby(obj/item/I, mob/user)
 	if(!ismob(user))
-		return 0
+		return FALSE
 	if(can_operate(src,user) && I.do_surgery(src,user)) //Surgery
-		return 1
+		return TRUE
+	if((status_flags & GODMODE)) // godmode takes no damage!
+		return FALSE
 	return I.attack(src, user, user.zone_sel.selecting)
 
 /mob/living/carbon/human/attackby(obj/item/I, mob/user)
+	if((status_flags & GODMODE)) // godmode takes no damage!
+		return FALSE
+
 	if(user == src && src.a_intent == I_DISARM && src.zone_sel.selecting == "mouth")
 		var/obj/item/blocked = src.check_mouth_coverage()
 		if(blocked)

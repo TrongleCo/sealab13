@@ -120,33 +120,32 @@
 
 	if(!config.guests_allowed && IsGuestKey(key))
 		alert(src,"This server doesn't allow guest accounts to play. Please go to http://www.byond.com/ and register for a key.","Guest","OK")
-		qdel(src)
+		del(src)
 		return
 
-	if(config.player_limit != 0)
-		if((GLOB.clients.len >= config.player_limit) && !(ckey in admin_datums))
-			alert(src,"This server is currently full and not accepting new connections.","Server Full","OK")
-			log_admin("[ckey] tried to join and was turned away due to the server being full (player_limit=[config.player_limit])")
-			qdel(src)
-			return
+	// player caps
+	if(!passSoftLimit())
+		alert(src,"This server has surpassed its soft player limit. Only staff and returning players will be allowed to enter.","Soft Cap","OK")
+		log_admin("[ckey] tried to join and was turned away due to the server being full (player soft limit=[config.player_soft_limit])")
+		del(src)
+		return
 
-	// Change the way they should download resources.
-	if(config.resource_urls && config.resource_urls.len)
-		src.preload_rsc = pick(config.resource_urls)
-	else src.preload_rsc = 1 // If config.resource_urls is not set, preload like normal.
+	if(!passHardLimit())
+		alert(src,"This server has surpassed its hard player limit. Only staff will be allowed to enter.","Hard Cap","OK")
+		log_admin("[ckey] tried to join and was turned away due to the server being full (player hard limit=[config.player_hard_limit])")
+		del(src)
+		return
 
 	if(byond_version < DM_VERSION)
 		to_chat(src, "<span class='warning'>You are running an older version of BYOND than the server and may experience issues.</span>")
 		to_chat(src, "<span class='warning'>It is recommended that you update to at least [DM_VERSION] at http://www.byond.com/download/.</span>")
 	to_chat(src, "<span class='warning'>If the title screen is black, resources are still downloading. Please be patient until the title screen appears.</span>")
-	GLOB.clients += src
-	GLOB.ckey_directory[ckey] = src
 
-	//Admin Authorisation
-	holder = admin_datums[ckey]
-	if(holder)
-		GLOB.admins += src
-		holder.owner = src
+	// Change the way they should download resources.
+	if(config.resource_urls && config.resource_urls.len)
+		src.preload_rsc = pick(config.resource_urls)
+	else
+		src.preload_rsc = 1 // If config.resource_urls is not set, preload like normal.
 
 	//preferences datum - also holds some persistant data for the client (because we may as well keep these datums to a minimum)
 	prefs = preferences_datums[ckey]
@@ -168,11 +167,6 @@
 		to_chat(src, "<span class='alert'>[custom_event_msg]</span>")
 		to_chat(src, "<br>")
 
-
-	if(holder)
-		add_admin_verbs()
-		admin_memo_show()
-
 	// Forcibly enable hardware-accelerated graphics, as we need them for the lighting overlays.
 	// (but turn them off first, since sometimes BYOND doesn't turn them on properly otherwise)
 	spawn(5) // And wait a half-second, since it sounds like you can do this too fast.
@@ -181,7 +175,20 @@
 			sleep(2) // wait a bit more, possibly fixes hardware mode not re-activating right
 			winset(src, null, "command=\".configure graphics-hwmode on\"")
 
-	log_client_to_db()
+	// adding our client
+	GLOB.ckey_directory[ckey] = src
+	GLOB.clients += src
+
+	holder = admin_datums[ckey]
+	if(holder)
+		addAdmin()
+
+	// announcing join to other players in OOC
+	for(var/client/target in GLOB.clients)
+		if(!target)
+			continue
+		to_chat(target, "<span class='notice'><b>[src.key] has connected to the server.</b></span>")
+		sound_to(target, 'sound/effects/oocjoin.ogg')
 
 	send_resources()
 
@@ -200,6 +207,7 @@
 
 	if(holder)
 		src.control_freak = 0 //Devs need 0 for profiler access
+
 	//////////////
 	//DISCONNECT//
 	//////////////
@@ -208,10 +216,11 @@
 	if(src && watched_variables_window)
 		STOP_PROCESSING(SSprocessing, watched_variables_window)
 	if(holder)
-		holder.owner = null
-		GLOB.admins -= src
+		removeAdmin()
+
 	GLOB.ckey_directory -= ckey
 	GLOB.clients -= src
+
 	return ..()
 
 /client/Destroy()
@@ -376,3 +385,49 @@ client/verb/character_setup()
 /client/proc/apply_fps(var/client_fps)
 	if(world.byond_version >= 511 && byond_version >= 511 && client_fps >= CLIENT_MIN_FPS && client_fps <= CLIENT_MAX_FPS)
 		vars["fps"] = prefs.clientfps
+
+// If the client exists in the database
+client/proc/isDBLogged()
+	if(!dbcon.IsConnected())
+		return 0
+
+	var/sql_ckey = sql_sanitize_text(src.ckey)
+	var/DBQuery/query = dbcon.NewQuery("SELECT id FROM player WHERE ckey = '[sql_ckey]'")
+	query.Execute()
+
+	while(query.NextRow())
+		return 1
+
+	return 0
+
+client/proc/passSoftLimit()
+	if(GLOB.clients.len < config.player_soft_limit)
+		return 1
+
+	if(holder) // staff can always join
+		return 1
+
+	if(isDBLogged()) // players who have connected before may join
+		return 1
+
+	return 0
+
+client/proc/passHardLimit()
+	if(GLOB.clients.len < config.player_hard_limit)
+		return 1
+
+	if(holder) // staff can always join
+		return 1
+
+	return 0
+
+client/proc/addAdmin()
+	GLOB.admins += src
+	holder.owner = src
+
+	add_admin_verbs()
+	admin_memo_show()
+
+client/proc/removeAdmin()
+	holder.owner = null
+	GLOB.admins -= src

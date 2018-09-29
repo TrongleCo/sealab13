@@ -582,9 +582,14 @@
 			pullin.icon_state = "pull0"
 
 /mob/proc/start_pulling(var/atom/movable/AM)
-
 	if ( !AM || !usr || src==AM || !isturf(src.loc) )	//if there's no person pulling OR the person is pulling themself OR the object being pulled is inside something: abort!
 		return
+
+	if(istype(AM, /mob/living/carbon/human))
+		var/mob/living/carbon/C = AM
+		if(C.status_flags & GODMODE)
+			to_chat(src, "<span class='warning'>You can't seem to get a grip on them!</span>")
+			return
 
 	if (AM.anchored)
 		to_chat(src, "<span class='warning'>It won't budge!</span>")

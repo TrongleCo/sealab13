@@ -571,56 +571,17 @@ var/world_topic_spam_protect_time = world.timeofday
 /world/proc/update_status()
 	var/s = ""
 
-	if (config && config.server_name)
-		s += "<b>[config.server_name]</b> &#8212; "
+	if(config && config.server_name)
+		if(config.forumurl)
+			s += "<a href=\"[config.forumurl]\"><big><b>[config.server_name]</b></big></a>"
+		else
+			s += "<big><b>[config.server_name]</b></big>"
+		s += "\]<br>" // shhh dont tell byond
+	if(config && config.hostedby)
+		s += "<small><i>hosted by [config.hostedby]</i></small><br>"
 
-	s += "<b>[station_name()]</b>";
-	s += " ("
-	s += "<a href=\"https://example.net/\">" //Change this to wherever you want the hub to link to.
-//	s += "[game_version]"
-	s += "Example"  //Replace this with something else. Or ever better, delete it and uncomment the game version.
-	s += "</a>"
-	s += ")"
-
-	var/list/features = list()
-
-	if(ticker)
-		if(master_mode)
-			features += master_mode
-	else
-		features += "<b>STARTING</b>"
-
-	if (!config.enter_allowed)
-		features += "closed"
-
-	features += config.abandon_allowed ? "respawn" : "no respawn"
-
-	if (config && config.allow_vote_mode)
-		features += "vote"
-
-	if (config && config.allow_ai)
-		features += "AI allowed"
-
-	var/n = 0
-	for (var/mob/M in GLOB.player_list)
-		if (M.client)
-			n++
-
-	if (n > 1)
-		features += "~[n] players"
-	else if (n > 0)
-		features += "~[n] player"
-
-
-	if (config && config.hostedby)
-		features += "hosted by <b>[config.hostedby]</b>"
-
-	if (features)
-		s += ": [jointext(features, ", ")]"
-
-	/* does this help? I do not know */
-	if (src.status != s)
-		src.status = s
+	if(GLOB.clients && config && config.player_soft_limit)
+		s += "Players: \[[GLOB.clients.len] / [config.player_soft_limit]"
 
 #define WORLD_LOG_START(X) WRITE_FILE(GLOB.world_##X##_log, "\n\nStarting up round ID [game_id]. [time_stamp()]\n---------------------")
 #define WORLD_SETUP_LOG(X) GLOB.world_##X##_log = file("[GLOB.log_directory]/[#X].log") ; WORLD_LOG_START(X)
