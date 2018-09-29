@@ -185,10 +185,10 @@
 
 	// announcing join to other players in OOC
 	for(var/client/target in GLOB.clients)
-		if( !target )
+		if(!target)
 			continue
-		communicate(/decl/communication_channel/ooc, src, "<span class='notice'><b>has connected to the server.</b></span>")
-		sound_to(target , 'sound/effects/oocjoin.ogg')
+		to_chat(target, "<span class='notice'><b>[src.key] has connected to the server.</b></span>")
+		sound_to(target, 'sound/effects/oocjoin.ogg')
 
 	send_resources()
 
