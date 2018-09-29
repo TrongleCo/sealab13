@@ -159,7 +159,6 @@ var/list/gamemode_cache = list()
 	var/login_export_addr = null
 
 	var/enter_allowed = 1
-	var/player_limit = 0
 
 	var/use_irc_bot = 0
 	var/irc_bot_host = ""
@@ -219,6 +218,9 @@ var/list/gamemode_cache = list()
 	var/max_gear_cost = 10 // Used in chargen for accessory loadout limit. 0 disables loadout, negative allows infinite points.
 
 	var/allow_ic_printing = TRUE //Whether players should be allowed to print IC circuits from scripts.
+
+	var/player_soft_limit = 40 // max number of first-time players
+	var/player_hard_limit = 60 // max number of total players
 
 /datum/configuration/New()
 	var/list/L = typesof(/datum/game_mode) - /datum/game_mode
@@ -729,8 +731,10 @@ var/list/gamemode_cache = list()
 					radiation_material_resistance_divisor = text2num(value)
 				if("radiation_lower_limit")
 					radiation_lower_limit = text2num(value)
-				if("player_limit")
-					player_limit = text2num(value)
+				if("player_soft_limit")
+					player_soft_limit = text2num(value)
+				if("player_hard_limit")
+					player_hard_limit = text2num(value)
 				if("hub")
 					world.update_hub_visibility()
 
