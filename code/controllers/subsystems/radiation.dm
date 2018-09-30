@@ -52,8 +52,8 @@ SUBSYSTEM_DEF(radiation)
 			var/rads = get_rads_at_turf(T)
 			if(rads)
 				A.rad_act(rads)
-		if (MC_TICK_CHECK)
-			return
+		if(!(listeners.len % 20))
+			if (MC_TICK_CHECK)		return
 
 /datum/controller/subsystem/radiation/stat_entry()
 	..("S:[sources.len], RC:[resistance_cache.len]")
@@ -61,33 +61,29 @@ SUBSYSTEM_DEF(radiation)
 // Ray trace from all active radiation sources to T and return the strongest effect.
 /datum/controller/subsystem/radiation/proc/get_rads_at_turf(var/turf/T)
 	. = 0
-	if(!istype(T))
-		return
 
 	for(var/value in sources)
 		var/datum/radiation_source/source = value
-		if(source.rad_power < .)
-			continue // Already being affected by a stronger source
-		if(source.source_turf.z != T.z)
-			continue // Radiation is not multi-z
+		if(source.source_turf.z != T.z)		continue // Radiation is not multi-z
+		if(source.rad_power < .)			continue // Already being affected by a stronger source
 		if(source.respect_maint)
 			var/area/A = T.loc
 			if(A.area_flags & AREA_FLAG_RAD_SHIELDED)
 				continue // In shielded area
 
-		var/dist = get_dist(source.source_turf, T)
-		if(dist > source.range)
-			continue // Too far to possibly affect
 		if(source.flat)
 			. = max(., source.rad_power)
-			continue // No need to ray trace for flat  field
+			continue // No need to ray trace for flat field
+
+		var/dist = get_dist(source.source_turf, T)
+		if(dist > source.range)		continue // Too far to possibly affect
 
 		// Okay, now ray trace to find resistence!
 		var/turf/origin = source.source_turf
 		var/working = source.rad_power
 		while(origin != T)
 			origin = get_step_towards(origin, T) //Raytracing
-			if(!resistance_cache[origin]) //Only get the resistance if we don't already know it.
+			if(!resistance_cache[origin]) // Only get the resistance if we don't already know it.
 				origin.calc_rad_resistance()
 			if(origin.cached_rad_resistance)
 				working = round((working / (origin.cached_rad_resistance * config.radiation_resistance_multiplier)), 0.1)

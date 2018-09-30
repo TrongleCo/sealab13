@@ -183,20 +183,14 @@
 */
 
 /area/proc/powered(var/chan)		// return true if the area has power to given channel
+	if(always_unpowered)	return 0
+	if(!requires_power)		return 1
 
-	if(!requires_power)
-		return 1
-	if(always_unpowered)
-		return 0
 	switch(chan)
-		if(EQUIP)
-			return power_equip
-		if(LIGHT)
-			return power_light
-		if(ENVIRON)
-			return power_environ
-
-	return 0
+		if(EQUIP)			return power_equip
+		if(LIGHT)			return power_light
+		if(ENVIRON)			return power_environ
+		else				return 0
 
 // called when power status changes
 /area/proc/power_change()

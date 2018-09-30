@@ -28,11 +28,10 @@ SUBSYSTEM_DEF(processing)
 		var/datum/thing = current_run[current_run.len]
 		current_run.len--
 		if(QDELETED(thing) || (call(thing, process_proc)(wait, times_fired, src) == PROCESS_KILL))
-			if(thing)
-				thing.is_processing = null
-			processing -= thing
-		if (MC_TICK_CHECK)
-			return
+			thing.is_processing = null
+			processing.Remove(thing)
+		if(!(current_run.len % 30))
+			if(MC_TICK_CHECK)		return
 
 /datum/controller/subsystem/processing/proc/toggle_debug()
 	if(!check_rights(R_DEBUG))

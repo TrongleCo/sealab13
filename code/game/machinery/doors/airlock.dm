@@ -357,18 +357,6 @@ var/list/airlock_overlays = list()
 /obj/machinery/door/airlock/vault/bolted
 	locked = 1
 
-/obj/machinery/door/airlock/Process()
-	if(main_power_lost_until > 0 && world.time >= main_power_lost_until)
-		regainMainPower()
-
-	if(backup_power_lost_until > 0 && world.time >= backup_power_lost_until)
-		regainBackupPower()
-
-	else if(electrified_until > 0 && world.time >= electrified_until)
-		electrify(0)
-
-	..()
-
 /obj/machinery/door/airlock/uranium/Process()
 	if(world.time > last_event+20)
 		if(prob(50))
@@ -469,11 +457,15 @@ About the new airlock wires panel:
 	return src.isWireCut(AIRLOCK_WIRE_BACKUP_POWER1) || src.isWireCut(AIRLOCK_WIRE_BACKUP_POWER2)
 
 /obj/machinery/door/airlock/proc/loseMainPower()
-	main_power_lost_until = mainPowerCablesCut() ? -1 : world.time + SecondsToTicks(60)
+	main_power_lost_until = mainPowerCablesCut() ? -1 : SecondsToTicks(60)
+	if ( main_power_lost_until > 0 )
+		spawn(main_power_lost_until)
+			regainMainPower()
 
 	// If backup power is permanently disabled then activate in 10 seconds if possible, otherwise it's already enabled or a timer is already running
 	if(backup_power_lost_until == -1 && !backupPowerCablesCut())
-		backup_power_lost_until = world.time + SecondsToTicks(10)
+		spawn(SecondsToTicks(10))
+			regainBackupPower()
 
 	// Disable electricity if required
 	if(electrified_until && isAllPowerLoss())
@@ -482,7 +474,10 @@ About the new airlock wires panel:
 	update_icon()
 
 /obj/machinery/door/airlock/proc/loseBackupPower()
-	backup_power_lost_until = backupPowerCablesCut() ? -1 : world.time + SecondsToTicks(60)
+	backup_power_lost_until = backupPowerCablesCut() ? -1 : SecondsToTicks(60)
+	if(backup_power_lost_until > 0 )
+		spawn(backup_power_lost_until)
+			regainBackupPower()
 
 	// Disable electricity if required
 	if(electrified_until && isAllPowerLoss())
@@ -525,7 +520,10 @@ About the new airlock wires panel:
 		else
 			shockedby += text("\[[time_stamp()]\] - EMP)")
 		message = "The door is now electrified [duration == -1 ? "permanently" : "for [duration] second\s"]."
-		src.electrified_until = duration == -1 ? -1 : world.time + SecondsToTicks(duration)
+		src.electrified_until = duration == -1 ? -1 : SecondsToTicks(duration)
+		if(src.electrified_until > 0)
+			spawn(src.electrified_until)
+				electrify(0)
 		. = 1
 
 	if(feedback && message)
@@ -1228,7 +1226,8 @@ About the new airlock wires panel:
 					if(world.time > next_beep_at)
 						playsound(src.loc, close_failure_blocked, 30, 0, -3)
 						next_beep_at = world.time + SecondsToTicks(10)
-					close_door_at = world.time + 6
+					spawn(6)
+						close()
 					return
 
 	for(var/turf/turf in locs)
