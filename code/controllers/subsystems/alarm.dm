@@ -8,7 +8,7 @@
 
 SUBSYSTEM_DEF(alarm)
 	name = "Alarm"
-	wait = 2 SECONDS
+	wait = 4 SECONDS
 	priority = SS_PRIORITY_ALARM
 	init_order = SS_INIT_ALARM
 	var/list/datum/alarm/all_handlers
@@ -32,8 +32,8 @@ SUBSYSTEM_DEF(alarm)
 
 		active_alarm_cache += AH.alarms
 
-		if (MC_TICK_CHECK)
-			return
+		if(!(current.len % 10))
+			if (MC_TICK_CHECK)		return
 
 /datum/controller/subsystem/alarm/proc/active_alarms()
 	return active_alarm_cache.Copy()

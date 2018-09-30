@@ -145,13 +145,13 @@ datum/controller/subsystem/machines/proc/setup_atmos_machinery(list/machines)
 	while(current_run.len)
 		var/datum/pipe_network/PN = current_run[current_run.len]
 		current_run.len--
-		if(istype(PN) && !QDELETED(PN))
+		if( !QDELETED(PN) )
 			PN.Process(wait)
 		else
 			pipenets.Remove(PN)
 			PN.is_processing = null
-		if(MC_TICK_CHECK)
-			return
+		if(!(current_run.len % 10))
+			if(MC_TICK_CHECK)		return
 
 /datum/controller/subsystem/machines/proc/process_machinery(resumed = 0)
 	if (!resumed)
@@ -161,14 +161,15 @@ datum/controller/subsystem/machines/proc/setup_atmos_machinery(list/machines)
 	while(current_run.len)
 		var/obj/machinery/M = current_run[current_run.len]
 		current_run.len--
-		if(istype(M) && !QDELETED(M) && !(M.Process(wait) == PROCESS_KILL))
-			if(M.use_power)
-				M.auto_use_power()
-		else
+
+		if( !QDELETED(M) && M.Process(wait) == PROCESS_KILL )
 			machinery.Remove(M)
 			M.is_processing = null
-		if(MC_TICK_CHECK)
-			return
+			continue
+		if(M.use_power)			M.auto_use_power()
+		if(!(current_run.len % 40))
+			if(prob(15)) 			return pause()
+			if(MC_TICK_CHECK)		return
 
 /datum/controller/subsystem/machines/proc/process_powernets(resumed = 0)
 	if (!resumed)
@@ -178,13 +179,13 @@ datum/controller/subsystem/machines/proc/setup_atmos_machinery(list/machines)
 	while(current_run.len)
 		var/datum/powernet/PN = current_run[current_run.len]
 		current_run.len--
-		if(istype(PN) && !QDELETED(PN))
+		if( !QDELETED(PN) )
 			PN.reset(wait)
 		else
 			powernets.Remove(PN)
 			PN.is_processing = null
-		if(MC_TICK_CHECK)
-			return
+		if(!(current_run.len % 5))
+			if(MC_TICK_CHECK)		return
 
 /datum/controller/subsystem/machines/proc/process_power_objects(resumed = 0)
 	if (!resumed)
@@ -197,8 +198,8 @@ datum/controller/subsystem/machines/proc/setup_atmos_machinery(list/machines)
 		if(!I.pwr_drain(wait)) // 0 = Process Kill, remove from processing list.
 			power_objects.Remove(I)
 			I.is_processing = null
-		if(MC_TICK_CHECK)
-			return
+		if(!(current_run.len % 30))
+			if(MC_TICK_CHECK)		return
 
 /datum/controller/subsystem/machines/Recover()
 	if (istype(SSmachines.pipenets))
