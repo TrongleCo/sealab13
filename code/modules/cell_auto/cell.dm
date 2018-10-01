@@ -39,26 +39,21 @@
 	group.cells += src
 
 /atom/movable/cell/proc/process()
-	if( src.shouldDie() )
-		qdel( src )
+	if(src.shouldDie())
+		qdel(src)
 
-	if( group )
-		if( !group.shouldProcess() )
-			qdel( src )
+	if(group)
+		if(!group.shouldProcess())
+			qdel(src)
 
 	return
 
 /atom/movable/cell/proc/shouldProcess()
-	if( age_max )
-		if( age >= age_max )
-			return 0
-
-	return 1
+	return shouldDie()
 
 /atom/movable/cell/proc/shouldDie()
-	if( age_max )
-		if( age >= age_max )
-			return 1
+	if(age_max && age >= age_max)
+		return 1
 
 	return 0
 

@@ -78,8 +78,12 @@
 	//if(!use_power)
 	//	return 1
 
-	if(!check_area)		check_area = src.loc.loc 	// check_area can only be an area
-	if(chan == -1)		chan = power_channel
+	if(!check_area)
+		check_area = src.loc.loc		// make sure it's in an area
+	if(!check_area || !isarea(check_area))
+		return 0					// if not, then not powered
+	if(chan == -1)
+		chan = power_channel
 	return check_area.powered(chan)					// return power status of the area
 
 // increment the power usage stats for an area

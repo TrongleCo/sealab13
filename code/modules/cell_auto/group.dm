@@ -6,7 +6,7 @@
 	var/cell_type = null
 	var/list/atom/movable/cell/cells = list()
 
-/datum/ca_group/New( var/loc as turf, size = 0 )
+/datum/ca_group/New(var/loc as turf, size = 0 )
 	..()
 
 	if( loc && cell_type )
@@ -31,8 +31,7 @@
 		cell.process()
 
 /datum/ca_group/proc/shouldProcess()
-	if( group_age_max )
-		if( group_age >= group_age_max )
-			return 0
+	if(group_age_max && group_age >= group_age_max)
+		return 0
 
 	return 1
