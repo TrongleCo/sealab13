@@ -9,17 +9,13 @@ proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impa
 
 		// z-Level Stuff
 		if(z_transfer && (devastation_range > 0 || heavy_impact_range > 0))
-			if(z_transfer & DOWN)
-				//start the child explosion, no admin log and no additional transfers
-				explosion(GetBelow(epicenter), max(devastation_range - 2, 0), max(heavy_impact_range - 2, 0), max(light_impact_range - 2, 0), max(flash_range - 2, 0), 0, 0)
-				if(devastation_range - 2 > 0 || heavy_impact_range - 2 > 0) //only transfer further if the explosion is still big enough
-					explosion(GetBelow(epicenter), max(devastation_range - 2, 0), max(heavy_impact_range - 2, 0), max(light_impact_range - 2, 0), max(flash_range - 2, 0), 0, 1)
+			//only transfer further if the explosion is still big enough
+			if(z_transfer & DOWN && (devastation_range - 2 > 0 || heavy_impact_range - 2 > 0))
+				explosion(GetBelow(epicenter), max(devastation_range-2, 0), max(heavy_impact_range-2, 0), max(light_impact_range-2, 0), max(flash_range-2, 0), 0, 0)
 
-			if(z_transfer & UP)
-				//start the child explosion, no admin log and no additional transfers
-				explosion(GetAbove(epicenter), max(devastation_range - 2, 0), max(heavy_impact_range - 2, 0), max(light_impact_range - 2, 0), max(flash_range - 2, 0), 0, 0)
-				if(devastation_range - 2 > 0 || heavy_impact_range - 2 > 0) //only transfer further if the explosion is still big enough
-					explosion(GetAbove(epicenter), max(devastation_range - 2, 0), max(heavy_impact_range - 2, 0), max(light_impact_range - 2, 0), max(flash_range - 2, 0), 1, 0)
+			//only transfer further if the explosion is still big enough
+			if(z_transfer & UP && (devastation_range - 2 > 0 || heavy_impact_range - 2 > 0))
+				explosion(GetAbove(epicenter), max(devastation_range-2, 0), max(heavy_impact_range-2, 0), max(light_impact_range-2, 0), max(flash_range-2, 0), 0, 0)
 
 		// We want sounds to be different depending on distance so we will manually do it ourselves.
 		// Calculate far explosion sound range. Only allow the sound effect for heavy/devastating explosions.
@@ -44,7 +40,7 @@ proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impa
 			log_game("Explosion with size ([devastation_range], [heavy_impact_range], [light_impact_range]) in area [epicenter.loc.name] ")
 
 		// spawning the actual explosion
-		new /datum/ca_group/explosion( epicenter, devastation_range, heavy_impact_range, light_impact_range )
+		new /datum/ca_group/explosion(epicenter, devastation_range, heavy_impact_range, light_impact_range)
 
 		// machines which report explosions.
 		for(var/i,i<=doppler_arrays.len,i++)
