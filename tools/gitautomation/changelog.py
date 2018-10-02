@@ -1,4 +1,4 @@
-import re
+import os, re, requests
 
 valid_cl_types = ("bugfix", "wip", "tweak", "soundadd", "sounddel", "rscadd", "rscdel", "imageadd", "imagedel", "maptweak", "spellcheck", "experiment")
 # what the different cl entry types should be changed to when dumping the changelog to a discord-friendly format
@@ -16,6 +16,58 @@ change_type_map = {
 	"spellcheck": "<:spelling:495732536727830539>",
 	"experiment": "<:experimental:495732459376345089>"
 }
+
+environ_vals = (
+	os.environ["AUTOCL_DISCORD_ID"],
+	os.environ["AUTOCL_DISCORD_TOKEN"],
+	os.environ["AUTOCL_GITHUB_PAT"]
+)
+
+# name of the branches you want changelogs generated for
+watched_branches = (
+	"master",
+	"dev",
+	"hotfix",
+	"fix"
+)
+
+pr_number_pattern = re.compile("(\w+):(\d+)")
+# this tracks progress on changelog generation
+# note that this is the index in the JSON returned by the github api, not the PR number
+last_pr_numbers = {}
+# fetch where to start for the different branches
+try:
+	file = open("lastprnums.txt", "r")
+
+	for line in file.readlines():
+		match = pr_number_pattern.search(line)
+		if not match:
+			continue
+
+		last_pr_numbers[match.group(1)] = int(match.group(2))
+
+	file.close()
+except FileNotFoundError:
+	pass
+
+# save the last processed pr numbers
+def save_pr_nums():
+	content = ""
+	for branch in last_pr_numbers:
+		last_pr_num = last_pr_numbers.get(branch)
+		content += "{}:{}\n".format(branch, str(last_pr_num))
+
+	with open("lastprnums.txt", "w") as file:
+		file.write(content)
+
+discord_webhook = "https://discordapp.com/api/webhooks/{}/{}".format(environ_vals[0], environ_vals[1])
+
+# api urls
+# change to fit your needs
+list_prs_url = "http://api.github.com/repos/TrongleCo/sealab13/pulls?state=closed&sort=created&direction=asc&base={}"
+is_merged_url = "http://api.github.com/repos/TrongleCo/sealab13/pulls/{}/merge"
+
+###################################################################################
 
 class Changelog:
 	def __init__(self):
@@ -53,37 +105,53 @@ class Changelog:
 			file.write(data.format(self.author, change_data))
 
 	# make a discord-friendly version of the CL
-	def dump_discord(self, link):
-		msg = "**{}** made some changes:\n\n{}\nLink to PR: {}"
+	def dump_discord(self, link, branch):
+		msg = "**{}** made some changes on **{}**:\n\n{}\nLink to PR: {}"
 		change_data = ""
 
 		for line in self.lines:
 			change_data += "\t\t{}\t\t\t\t{}\n".format(change_type_map[line["type"]], line["log"])
 
-		return msg.format(self.author, change_data, link)
+		return msg.format(self.author, branch, change_data, link)
 
 # CL regexps
-cl_start = re.compile("(:cl:)\s*([\w\s1-9]+)?")
+cl_start = re.compile(":cl:\s*([\w\ 1-9]+)?")
 cl_entry = re.compile("\s*(\w+):\s*(.+)")
 cl_end = re.compile("\/:cl:")
+
+comment_start = re.compile("<!--")
+comment_end = re.compile("-->")
 
 def generate_changelog(data):
 	cl = Changelog()
 	in_cl = False
+	in_comment = False
 
 	for line in iter(data.splitlines()):
+		# don't parse comments
+		if in_comment:
+			match = comment_end.search(line)
+			if not match:
+				continue
+			in_comment = False
+
+		match = comment_start.search(line)
+		if match:
+			in_comment = True
+			continue
+
 		if not in_cl:
 			# look for start of CL
 			match = cl_start.search(line)
-			if not match or not match.group(0):
+			if not match:
 				continue
 
 			in_cl = True
-			if(match.group(2)):
-				cl.set_author(match.group(2))
+			if(match.group(1)):
+				cl.set_author(match.group(1))
 		else:
 			match = cl_entry.search(line)
-			if not match or not match.group(0):
+			if not match:
 				continue
 
 			groups = (match.group(1), match.group(2))
@@ -102,3 +170,59 @@ def generate_changelog(data):
 	if not in_cl:
 		return None
 	return cl
+
+###################################################################################
+
+# this fetches all the pull requests merged into each individual branch
+# it goes through those PRs and generates a changelog file for each one on the first run
+# on subsequent runs it will only go through PRs starting from where it last left off
+def generate_changelogs():
+	for branch in watched_branches:
+		# get all closed prs on the branch
+		resp = requests.post(list_prs_url.format(branch), auth=("halworsen", environ_vals[2]))
+		prs = resp.json()
+
+		if not len(prs):
+			continue
+
+		# where did we stop processing PRs last time
+		start = last_pr_numbers.get(branch)
+		if not start:
+			start = 0
+
+		# go through all the prs we haven't processed and make changelogs if they're merged
+		for i in range(start, len(prs)):
+			pr = prs[i]
+
+			# make sure the PR is merged
+			resp = requests.post(is_merged_url.format(pr.get("number")), auth=("halworsen", environ_vals[2]))
+			# 204: merged. 404: not merged
+			# check for not 204 in case the api fucks up
+			if resp.status_code != 204:
+				continue
+
+			user = pr.get("user")
+			if not user:
+				user = "somebody"
+			else:
+				user = user.get("login")
+
+			# make the changelog
+			cl = generate_changelog(pr.get("body"))
+			# no changelog :(
+			if not cl:
+				continue
+			if not cl.author:
+				cl.set_author(user)
+
+			# send the changelog to discord
+			cl_json = {"content": cl.dump_discord(pr.get("html_url"), branch)}
+			requests.post(discord_webhook, json=cl_json)
+
+			# make a yaml file for the changelog
+			cl.dump_yaml("{}-pr-{}".format(user, pr.get("id")))
+
+		# save our progress on changelog generation
+		last_pr_numbers[branch] = len(prs)
+
+	save_pr_nums()
