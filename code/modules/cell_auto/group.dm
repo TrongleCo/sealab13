@@ -6,7 +6,7 @@
 	var/cell_type = null
 	var/list/atom/movable/cell/cells = list()
 
-/datum/ca_group/New(var/loc as turf, size = 0 )
+/datum/ca_group/New(var/loc as turf, size = 0)
 	..()
 
 	if( loc && cell_type )
@@ -25,10 +25,10 @@
 	if( !cells.len )
 		qdel( src )
 
-	group_age++
-
 	for( var/atom/movable/cell/cell in cells )
 		cell.process()
+
+	group_age++
 
 /datum/ca_group/proc/shouldProcess()
 	if(group_age_max && group_age >= group_age_max)

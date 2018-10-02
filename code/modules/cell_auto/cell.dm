@@ -42,14 +42,16 @@
 	if(src.shouldDie())
 		qdel(src)
 
-	if(group)
-		if(!group.shouldProcess())
-			qdel(src)
+	if(group && !group.shouldProcess())
+		qdel(src)
 
 	return
 
 /atom/movable/cell/proc/shouldProcess()
-	return shouldDie()
+	if(shouldDie())
+		return 0
+
+	return 1
 
 /atom/movable/cell/proc/shouldDie()
 	if(age_max && age >= age_max)
