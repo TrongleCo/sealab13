@@ -6,11 +6,13 @@
 	var/devastation_range
 	var/heavy_impact_range
 	var/light_impact_range
+
 	var/max_cell_age
 	var/max_act_chance = 8 // the chance we'll immediately ex_act when the explosion starts
 	var/min_act_chance = 2 // the chance we'll immediately ex_act when the explosion ends
 	var/max_spread_chance = 100 // Introducing a little randomness to explosion expansion
 	var/min_spread_chance = 80
+
 	var/process_per_tick = 2 // how many times to process the cells per tick
 
 	var/start

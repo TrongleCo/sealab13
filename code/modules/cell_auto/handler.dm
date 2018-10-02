@@ -1,7 +1,7 @@
 /datum/cell_auto_handler
 	var/list/datum/ca_group/groups = list()
 	var/last_tick = 0
-	var/delay = 10 // One second
+	var/delay = 1 SECOND
 
 /datum/cell_auto_handler/New(var/interval = 0)
 	..()

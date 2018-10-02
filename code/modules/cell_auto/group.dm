@@ -9,23 +9,23 @@
 /datum/ca_group/New(var/loc as turf, size = 0)
 	..()
 
-	if( loc && cell_type )
+	if(loc && cell_type)
 		new cell_type(loc, src)
 
-	if( size )
+	if(size)
 		group_age_max = size
 
 /datum/ca_group/Destroy()
-	for( var/cell in cells )
-		qdel( cell )
+	for(var/cell in cells)
+		qdel(cell)
 
 	..()
 
 /datum/ca_group/proc/process()
-	if( !cells.len )
-		qdel( src )
+	if(!cells.len)
+		qdel(src)
 
-	for( var/atom/movable/cell/cell in cells )
+	for(var/atom/movable/cell/cell in cells)
 		cell.process()
 
 	group_age++
