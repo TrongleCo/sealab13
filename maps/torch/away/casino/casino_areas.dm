@@ -1,5 +1,5 @@
 area/casino
-	icon = 'maps/away/casino/casino_sprites.dmi'
+	icon = 'maps/torch/away/casino/casino_sprites.dmi'
 
 area/casino/casino_mainfloor
 	name = "\improper Casino Hall"

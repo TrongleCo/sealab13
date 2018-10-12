@@ -2,4 +2,4 @@
 
 /datum/map_template/ruin/away_site
 	var/spawn_weight = 1
-	prefix = "maps/away/"
+	prefix = "maps/torch/away/"

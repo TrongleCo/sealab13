@@ -5,8 +5,8 @@
 
 /world
 	mob = /mob/new_player
-	turf = /turf/ocean
-	area = /area/space
+	turf = /turf/simulated/ocean
+	area = /area/exterior/ocean
 	view = "15x15"
 	cache_lifespan = 7
 	hub = "Exadv1.spacestation13"

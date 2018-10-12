@@ -27,7 +27,7 @@
 /mob/living/simple_animal/hostile/hive_alien/defender
 	name = "hive defender"
 	desc = "A terrifying monster resembling a massive, bloated tick in shape. Hundreds of blades are hidden underneath its rough shell."
-	icon = 'maps/away/blueriver/blueriver.dmi'
+	icon = 'maps/torch/away/blueriver/blueriver.dmi'
 	icon_state = "hive_executioner_move"
 	icon_living = "hive_executioner_move"
 	icon_dead = "hive_executioner_dead"
