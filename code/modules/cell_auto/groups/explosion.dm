@@ -25,12 +25,10 @@
 	var/list/affected_turfs = list()
 
 /datum/ca_group/explosion/shouldProcess()
-	if(group_age <= group_age_max)
-		return 1
-	return 0
+	. = group_age <= group_age_max
 
 /datum/ca_group/explosion/New(var/loc as turf, var/devastation, var/heavy_impact, var/light_impact)
-	..()
+	. = ..()
 
 	start_loc = loc
 
@@ -60,7 +58,7 @@
 	if(!air_processing_deferred)
 		air_processing_killed = 0
 
-	..()
+	. = ..()
 
 /datum/ca_group/explosion/process()
 	// hacky AF, makes explosions process twice per tick so they spread fast
@@ -100,10 +98,10 @@
 
 /datum/ca_group/explosion/proc/getSeverity()
 	if(group_age <= devastation_range)
-		return 1.0
+		. = 1.0
 	else if(group_age <= heavy_impact_range)
-		return 2.0
+		. = 2.0
 	else if(group_age <= light_impact_range)
-		return 3.0
+		. = 3.0
 	else
-		return 0
+		. = 0.0

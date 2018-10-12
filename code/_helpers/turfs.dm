@@ -9,6 +9,9 @@
 /proc/iswall(turf/T)
 	return (istype(T, /turf/simulated/wall) || istype(T, /turf/unsimulated/wall) || istype(T, /turf/simulated/shuttle/wall))
 
+/proc/isbarrier(turf/T)
+	. = T.density
+
 /proc/isfloor(turf/T)
 	return (istype(T, /turf/simulated/floor) || istype(T, /turf/unsimulated/floor))
 

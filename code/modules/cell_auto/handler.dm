@@ -17,10 +17,5 @@
 	for(var/datum/ca_group/group in groups)
 		group.process()
 
-	return
-
 /datum/cell_auto_handler/proc/shouldProcess()
-	if(((world.timeofday - last_tick) > delay) || ((world.timeofday - last_tick) < 0))
-		return 1
-
-	return 0
+	. = (world.timeofday - last_tick) > delay || (world.timeofday - last_tick) < 0

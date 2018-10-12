@@ -7,7 +7,7 @@
 	var/list/atom/movable/cell/cells = list()
 
 /datum/ca_group/New(var/loc as turf, size = 0)
-	..()
+	. = ..()
 
 	if(loc && cell_type)
 		new cell_type(loc, src)
@@ -19,7 +19,7 @@
 	for(var/cell in cells)
 		qdel(cell)
 
-	..()
+	. = ..()
 
 /datum/ca_group/proc/process()
 	if(!cells.len)
@@ -31,7 +31,4 @@
 	group_age++
 
 /datum/ca_group/proc/shouldProcess()
-	if(group_age_max && group_age >= group_age_max)
-		return 0
-
-	return 1
+	. = group_age_max && group_age >= group_age_max
