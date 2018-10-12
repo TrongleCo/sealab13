@@ -18,7 +18,7 @@
 	var/group_type = /datum/ca_group
 
 /atom/movable/cell/New(loc as turf, var/set_group = null)
-	..()
+	. = ..()
 
 	var/turf/T = get_turf(src)
 	if(T) // Checking and setting the turf's automata cell
@@ -48,16 +48,10 @@
 	return
 
 /atom/movable/cell/proc/shouldProcess()
-	if(shouldDie())
-		return 0
-
-	return 1
+	. = shouldDie()
 
 /atom/movable/cell/proc/shouldDie()
-	if(age_max && age >= age_max)
-		return 1
-
-	return 0
+	. = age_max && age >= age_max
 
 /atom/movable/cell/proc/spread()
 	return
@@ -73,9 +67,7 @@
 
 	group = null
 
-	..()
-
-	return
+	. = ..()
 
 /atom/movable/cell/singularity_act()
 	return

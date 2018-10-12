@@ -21,13 +21,13 @@
 	var/severity = 0
 
 /atom/movable/cell/explosion/New()
-	..()
+	. = ..()
 
 	set_light(0.5, 1, 3, l_color = light_color)
 	update_icon()
 
 /atom/movable/cell/explosion/update_icon()
-	..()
+	. = ..()
 
 	var/datum/ca_group/explosion/G = group
 
@@ -43,7 +43,7 @@
 	var/spawn_wait = rand(1, M.max_cell_age)
 	severity = M.getSeverity()
 
-	if(iswall(src.loc) || prob(act_chance))
+	if(!loc.Enter(src))
 		exAct(spawn_wait)
 	else
 		spawn(spawn_wait)
@@ -61,7 +61,9 @@
 
 /atom/movable/cell/explosion/proc/exAct(var/spawn_wait = 1)
 	for(var/atom/movable/AM in src.loc.contents)
+	{
 		AM.ex_act(severity)
+	}
 
 	src.loc.ex_act(severity)
 
@@ -71,13 +73,16 @@
 
 /atom/movable/cell/explosion/proc/checkTurf(var/turf/T)
 	if(!T)
-		return 0
+		. = 0
+		return
 
 	if(T.containsCell(type))
-		return 0
+		. = 0
+		return
 
 	var/datum/ca_group/explosion/M = group
 	if(M && T in M.affected_turfs)
-		return 0
+		. = 0
+		return
 
-	return 1
+	. = 1
