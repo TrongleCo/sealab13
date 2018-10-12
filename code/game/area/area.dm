@@ -11,7 +11,7 @@
 	var/party = null
 	level = null
 	name = "Unknown"
-	icon = 'icons/turf/areas_old.dmi'
+	icon = 'icons/turf/areas.dmi'
 	icon_state = "unknown"
 	plane = BASE_PLANE
 	layer = BASE_AREA_LAYER
