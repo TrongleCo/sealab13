@@ -9,6 +9,7 @@
 	power_equip = 0
 	power_environ = 0
 	area_flags = AREA_FLAG_EXTERNAL
+	base_turf = /turf/simulated/ocean
 
 /area/exterior/update_icon()
 	return
@@ -32,7 +33,7 @@
 	name = "\improper ocean"
 	icon_state = "ocean"
 	ambience = list('sound/ambience/ambispace.ogg','sound/music/title2.ogg','sound/music/space.ogg','sound/music/main.ogg','sound/music/traitor.ogg')
-	base_turf = /turf/ocean
+	base_turf = /turf/simulated/ocean
 
 /area/dormitory
 	name = "Dormitory"

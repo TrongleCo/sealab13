@@ -4,11 +4,12 @@
 	path = "sealab"
 	flags = MAP_HAS_BRANCH | MAP_HAS_RANK
 
-	station_levels = list(1,2,3,4,5)
-	contact_levels = list(1,2,3,4,5)
-	player_levels = list(1,2,3,4,5,8)
-	admin_levels = list(6,7)
-	empty_levels = list(8)
+	station_levels = list(1)
+	contact_levels = list(1)
+	player_levels = list(1)
+	admin_levels = list()
+	empty_levels = list()
+
 	accessible_z_levels = list("1"=1,"2"=1,"3"=1,"4"=1,"5"=1,"8"=30)
 	overmap_size = 35
 	overmap_event_areas = 34
