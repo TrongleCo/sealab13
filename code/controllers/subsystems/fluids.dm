@@ -2,11 +2,11 @@ var/datum/controller/subsystem/fluids/SSfluids
 
 /datum/controller/subsystem/fluids
 	name = "Fluids"
-	wait = 10
+	wait = 5
 	flags = SS_NO_INIT
 
 	var/next_water_act = 0
-	var/water_act_delay = 15 // A bit longer than machines.
+	var/water_act_delay = 5
 
 	var/list/active_fluids = list()
 	var/list/water_sources = list()

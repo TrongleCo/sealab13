@@ -30,7 +30,7 @@
 	. = ..()
 	if(isnull(detail_decal) && add_decal())
 		detail_decal = "asteroid[rand(0,9)]"
-		update_icon()
+	update_icon()
 
 /turf/simulated/ocean/update_icon(update_neighbors)
 	..(update_neighbors)
