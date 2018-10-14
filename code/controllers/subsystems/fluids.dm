@@ -142,7 +142,7 @@ var/datum/controller/subsystem/fluids/SSfluids
 				F.equalize_avg_temp += other.temperature
 
 				var/flow_amount = F.fluid_amount - other.fluid_amount
-				if(F.flow_amount < flow_amount && flow_amount >= FLUID_PUSH_THRESHOLD)
+				if(F.flow_amount < flow_amount && flow_amount >= FLUID_FLOW_PUSH)
 					F.flow_amount = flow_amount
 					setting_dir = get_dir(F, other)
 
@@ -173,9 +173,10 @@ var/datum/controller/subsystem/fluids/SSfluids
 			if (!F.loc || F.loc != F.start_loc)
 				qdel(F)
 
-			if(F.flow_amount >= 10)
-				if(prob(1))
-					playsound(F.loc, 'sound/effects/slosh.ogg', 25, 1)
+			if(F.flow_amount >= FLUID_FLOW_FLOOD && prob(1))
+				playsound(F.loc, 'sound/effects/slosh.ogg', 25, 1)
+
+			if(F.flow_amount >= FLUID_FLOW_PUSH)
 				for(var/atom/movable/AM in F.loc.contents)
 					if(isnull(pushing_atoms[AM]) && AM.is_fluid_pushable(F.flow_amount))
 						pushing_atoms[AM] = TRUE
