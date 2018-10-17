@@ -1,0 +1,19 @@
+"a" = (/turf/simulated/ocean,/area/exterior/ocean)
+"b" = (/turf/simulated/wall,/area/exterior/ocean)
+"c" = (/turf/simulated/floor/tiled,/area/exterior/ocean)
+"d" = (/obj/effect/landmark/test/safe_turf,/turf/simulated/floor/tiled,/area/exterior/ocean)
+"e" = (/obj/effect/landmark/start{name = "JoinLate"},/turf/simulated/floor/tiled,/area/exterior/ocean)
+"f" = (/obj/effect/landmark/test/space_turf,/turf/simulated/ocean,/area/exterior/ocean)
+
+(1,1,1) = {"
+aaaabbbbbb
+aaaabccccb
+aaaabcdccb
+aaaabccccb
+aaaabecccb
+aaaabbbbbb
+aaaaaaaaaa
+aaaaaaaaaa
+afaaaaaaaa
+aaaaaaaaaa
+"}

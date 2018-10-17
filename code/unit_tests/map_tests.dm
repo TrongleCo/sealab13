@@ -270,7 +270,7 @@ datum/unit_test/ladder_check/start_test()
 		if(L.allowed_directions & UP)
 			succeeded = check_direction(L, GetAbove(L), UP, DOWN) && succeeded
 		if(L.allowed_directions & DOWN)
-			succeeded = check_direction(L, GetBelow(L), DOWN, UP) && succeeded 
+			succeeded = check_direction(L, GetBelow(L), DOWN, UP) && succeeded
 			succeeded = check_open_space(L) && succeeded
 	if(succeeded)
 		pass("All ladders are correctly setup.")
@@ -306,27 +306,27 @@ datum/unit_test/ladder_check/start_test()
 
 /datum/unit_test/landmark_check/start_test()
 	var/safe_landmarks = 0
-	var/space_landmarks = 0
+	var/exterior_landmarks = 0
 
 	for(var/lm in landmarks_list)
 		var/obj/effect/landmark/landmark = lm
 		if(istype(landmark, /obj/effect/landmark/test/safe_turf))
 			log_debug("Safe landmark found: [log_info_line(landmark)]")
 			safe_landmarks++
-		else if(istype(landmark, /obj/effect/landmark/test/space_turf))
-			log_debug("Space landmark found: [log_info_line(landmark)]")
-			space_landmarks++
+		else if(istype(landmark, /obj/effect/landmark/test/exterior_turf))
+			log_debug("Exterior landmark found: [log_info_line(landmark)]")
+			exterior_landmarks++
 		else if(istype(landmark, /obj/effect/landmark/test))
 			log_debug("Test landmark with unknown tag found: [log_info_line(landmark)]")
 
-	if(safe_landmarks != 1 || space_landmarks != 1)
+	if(safe_landmarks != 1 || exterior_landmarks != 1)
 		if(safe_landmarks != 1)
 			log_bad("Found [safe_landmarks] safe landmarks. Expected 1.")
-		if(space_landmarks != 1)
-			log_bad("Found [space_landmarks] space landmarks. Expected 1.")
-		fail("Expected exactly one safe landmark, and one space landmark.")
+		if(exterior_landmarks != 1)
+			log_bad("Found [exterior_landmarks] space landmarks. Expected 1.")
+		fail("Expected exactly one safe landmark, and one exterior landmark.")
 	else
-		pass("Exactly one safe landmark, and exactly one space landmark found.")
+		pass("Exactly one safe landmark, and exactly one exterior landmark found.")
 
 	return 1
 

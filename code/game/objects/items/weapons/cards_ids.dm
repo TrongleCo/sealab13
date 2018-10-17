@@ -154,8 +154,8 @@ var/const/NO_EMAG_ACT = -50
 
 	var/job_access_type     // Job type to acquire access rights from, if any
 
-	var/datum/mil_branch/military_branch = null //Vars for tracking branches and ranks on multi-crewtype maps
-	var/datum/mil_rank/military_rank = null
+	var/datum/faction/military_branch = null //Vars for tracking branches and ranks on multi-crewtype maps
+	var/datum/job_rank/military_rank = null
 
 	var/formal_name_prefix
 	var/formal_name_suffix
