@@ -1,8 +1,3 @@
-/datum/gear/head/veteranhat
-	display_name = "veteran hat"
-	path = /obj/item/clothing/head/soft/solgov/veteranhat
-	allowed_branches = list(CORPORATION_FACTION)
-
 /datum/gear/head/surgical
 	allowed_roles = list(STERILE_ROLES)
 

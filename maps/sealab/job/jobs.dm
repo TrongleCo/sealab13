@@ -817,8 +817,8 @@
 	ideal_character_age = 24
 	alt_titles = list(
 		"Mailroom Clerk",
-		"Prospector"=/decl/hierarchy/outfit/job/sealab/faculty/supply/prospector,
-		"Shaft Miner"=/decl/hierarchy/outfit/job/sealab/faculty/supply/prospector
+		"Shaft Miner"=/decl/hierarchy/outfit/job/sealab/faculty/supply/miner,
+		"Prospector"=/decl/hierarchy/outfit/job/sealab/faculty/supply/miner
 	)
 
 	outfit_type = /decl/hierarchy/outfit/job/sealab/faculty/supply/cargo_tech

@@ -1,8 +1,8 @@
 /*
- * Torch Medical
+ * Sealab Medical
  */
 
-/obj/structure/closet/secure_closet/CMO_torch
+/obj/structure/closet/secure_closet/medical/CMO
 	name = "chief medical officer's locker"
 	req_access = list(access_cmo)
 	icon_state = "cmosecure1"
@@ -11,7 +11,7 @@
 	icon_opened = "cmosecureopen"
 	icon_off = "cmosecureoff"
 
-/obj/structure/closet/secure_closet/CMO_torch/WillContain()
+/obj/structure/closet/secure_closet/medical/CMO/WillContain()
 	return list(
 		/obj/item/clothing/suit/bio_suit/cmo,
 		/obj/item/clothing/head/bio_hood/cmo,
@@ -28,8 +28,6 @@
 		/obj/item/clothing/accessory/stethoscope,
 		/obj/item/device/flashlight/pen,
 		/obj/item/clothing/glasses/hud/health,
-		/obj/item/clothing/suit/armor/pcarrier/medium/command,
-		/obj/item/clothing/head/helmet/solgov/command,
 		/obj/item/device/holowarrant,
 		/obj/item/weapon/storage/firstaid/adv,
 		/obj/item/weapon/storage/box/armband/med,
@@ -39,8 +37,8 @@
 		RANDOM_SCRUBS
 	)
 
-/obj/structure/closet/secure_closet/medical_torchsenior
-	name = "physician's locker"
+/obj/structure/closet/secure_closet/medical/senior
+	name = "senior doctor's locker"
 	req_access = list(access_senmed)
 	icon_state = "securesenmed1"
 	icon_closed = "securesenmed"
@@ -48,7 +46,7 @@
 	icon_opened = "securesenmedopen"
 	icon_off = "securesenmedoff"
 
-/obj/structure/closet/secure_closet/medical_torchsenior/WillContain()
+/obj/structure/closet/secure_closet/medical/senior/WillContain()
 	return list(
 		/obj/item/clothing/under/sterile,
 		/obj/item/clothing/suit/storage/toggle/labcoat,
@@ -71,7 +69,7 @@
 		RANDOM_SCRUBS = 2
 	)
 
-/obj/structure/closet/secure_closet/medical_torch
+/obj/structure/closet/secure_closet/medical
 	name = "corpsman's locker"
 	req_access = list(access_medical_equip)
 	icon_state = "securemed1"
@@ -80,7 +78,7 @@
 	icon_opened = "securemedopen"
 	icon_off = "securemedoff"
 
-/obj/structure/closet/secure_closet/medical_torch/WillContain()
+/obj/structure/closet/secure_closet/medical/WillContain()
 	return list(
 		/obj/item/clothing/under/sterile,
 		/obj/item/clothing/accessory/storage/white_vest,
@@ -88,7 +86,6 @@
 		/obj/item/clothing/suit/storage/toggle/fr_jacket,
 		/obj/item/clothing/shoes/white,
 		/obj/item/device/radio/headset/headset_med,
-		/obj/item/device/radio/headset/headset_corpsman/alt,
 		/obj/item/taperoll/medical,
 		/obj/item/weapon/storage/belt/medical/emt,
 		/obj/item/clothing/mask/gas/half,
@@ -101,43 +98,12 @@
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/med, /obj/item/weapon/storage/backpack/messenger/med))
 	)
 
-/obj/structure/closet/secure_closet/medical_contractor
-	name = "medical contractor's locker"
-	req_access = list(access_medical)
-	icon_state = "securemed1"
-	icon_closed = "securemed"
-	icon_locked = "securemed1"
-	icon_opened = "securemedopen"
-	icon_off = "securemedoff"
-
-/obj/structure/closet/secure_closet/medical_contractor/WillContain()
-	return list(
-		/obj/item/clothing/under/sterile,
-		/obj/item/clothing/head/soft/mime,
-		/obj/item/clothing/under/rank/orderly,
-		/obj/item/clothing/accessory/storage/white_vest,
-		/obj/item/clothing/suit/storage/toggle/labcoat,
-		/obj/item/clothing/suit/storage/toggle/fr_jacket,
-		/obj/item/clothing/shoes/white,
-		/obj/item/device/radio/headset/headset_med,
-		/obj/item/device/radio/headset/headset_med/alt,
-		/obj/item/taperoll/medical,
-		/obj/item/weapon/storage/belt/medical/emt,
-		/obj/item/clothing/mask/gas/half,
-		/obj/item/weapon/tank/emergency/oxygen/engi,
-		/obj/item/device/healthanalyzer,
-		/obj/item/clothing/glasses/hud/health,
-		/obj/item/weapon/storage/firstaid/adv,
-		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/medic, /obj/item/weapon/storage/backpack/satchel_med)),
-		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/med, /obj/item/weapon/storage/backpack/messenger/med))
-	)
-
-/obj/structure/closet/wardrobe/medic_torch
-	name = "medical wardrobe"
+/obj/structure/closet/wardrobe/medical/sterile
+	name = "sterile wardrobe"
 	icon_state = "white"
 	icon_closed = "white"
 
-/obj/structure/closet/wardrobe/medic_torch/WillContain()
+/obj/structure/closet/wardrobe/medical/sterile/WillContain()
 	return list(
 		/obj/item/clothing/under/sterile = 2,
 		RANDOM_SCRUBS = 4,

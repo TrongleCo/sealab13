@@ -1,8 +1,8 @@
-//Torch ID Cards (they have to be here to make the outfits work, no way around it)
+// ID Cards (they have to be here to make the outfits work, no way around it)
 
 /obj/item/weapon/card/id/sealab
 	name = "identification card"
-	desc = "An identification card issued to personnel aboard the SEV Torch."
+	desc = "An identification card issued to faculty."
 	icon_state = "id"
 	item_state = "card-id"
 	job_access_type = /datum/job/service/intern

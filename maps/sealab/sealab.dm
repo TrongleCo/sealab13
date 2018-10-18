@@ -7,8 +7,6 @@
 	#include "presets.dm"
 
 	#include "datums/uniforms.dm"
-	#include "datums/uniforms_expedition.dm"
-	#include "datums/uniforms_fleet.dm"
 	#include "datums/reports.dm"
 	#include "datums/shackle_law_sets.dm"
 	#include "datums/supplypacks/security.dm"
@@ -23,14 +21,6 @@
 	#include "items/stamps.dm"
 	#include "items/uniform_vendor.dm"
 	#include "items/rigs.dm"
-	#include "items/solbanner.dm"
-
-	#include "items/clothing/solgov-accessory.dm"
-	#include "items/clothing/solgov-armor.dm"
-	#include "items/clothing/solgov-feet.dm"
-	#include "items/clothing/solgov-head.dm"
-	#include "items/clothing/solgov-suit.dm"
-	#include "items/clothing/solgov-under.dm"
 
 	#include "job/access.dm"
 	#include "job/jobs.dm"
@@ -39,8 +29,7 @@
 	#include "machinery/keycard authentication.dm"
 
 	#include "structures/closets.dm"
-	#include "structures/signs.dm"
-	#include "structures/closets/command.dm"
+	#include "structures/closets/executive.dm"
 	#include "structures/closets/engineering.dm"
 	#include "structures/closets/medical.dm"
 	#include "structures/closets/misc.dm"

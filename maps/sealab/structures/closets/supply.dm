@@ -1,9 +1,9 @@
 /*
- * Torch Supply
+ * Sealab Supply
  */
 
-/obj/structure/closet/secure_closet/decktech
-	name = "deck technician's locker"
+/obj/structure/closet/supply/cargo_tech
+	name = "cargo technician's locker"
 	req_access = list(access_cargo)
 	icon_state = "securecargo1"
 	icon_closed = "securecargo"
@@ -11,7 +11,7 @@
 	icon_opened = "securecargoopen"
 	icon_off = "securecargooff"
 
-/obj/structure/closet/secure_closet/decktech/WillContain()
+/obj/structure/closet/supply/cargo_tech/WillContain()
 	return list(
 		/obj/item/device/radio/headset/headset_cargo,
 		/obj/item/device/radio/headset/headset_cargo/alt,
@@ -30,8 +30,8 @@
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/messenger = 75, /obj/item/weapon/storage/backpack/dufflebag = 25))
 	)
 
-/obj/structure/closet/secure_closet/deckofficer
-	name = "deck chief's locker"
+/obj/structure/closet/supply/quartermaster
+	name = "quartermaster's locker"
 	req_access = list(access_qm)
 	icon_state = "secureqm1"
 	icon_closed = "secureqm"
@@ -39,10 +39,10 @@
 	icon_opened = "secureqmopen"
 	icon_off = "secureqmoff"
 
-/obj/structure/closet/secure_closet/deckofficer/WillContain()
+/obj/structure/closet/supply/quartermaster/WillContain()
 	return list(
-		/obj/item/device/radio/headset/headset_deckofficer,
-		/obj/item/device/radio/headset/headset_deckofficer/alt,
+		/obj/item/device/radio/headset/headset_mining,
+		/obj/item/device/radio/headset/headset_cargo,
 		/obj/item/clothing/gloves/thick,
 		/obj/item/clothing/glasses/meson,
 		/obj/item/clothing/glasses/sunglasses,
@@ -56,7 +56,6 @@
 		/obj/item/device/flash,
 		/obj/item/device/megaphone,
 		/obj/item/device/holowarrant,
-		/obj/item/clothing/suit/armor/pcarrier/light/sol,
 		/obj/item/device/binoculars,
 		/obj/item/weapon/storage/belt/general,
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack = 75, /obj/item/weapon/storage/backpack/satchel/grey = 25)),

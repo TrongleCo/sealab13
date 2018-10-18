@@ -43,7 +43,7 @@
 		/obj/item/weapon/storage/secure/briefcase,
 		/obj/item/device/radio/headset/headset_com,
 		/obj/item/clothing/shoes/laceup,
-		/obj/item/clothing/under/rank/internalaffairs/plain/solgov,
+		/obj/item/clothing/under/rank/internalaffairs,
 		/obj/item/clothing/suit/storage/toggle/suit/black,
 		/obj/item/clothing/glasses/sunglasses/big,
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack, /obj/item/weapon/storage/backpack/satchel)),

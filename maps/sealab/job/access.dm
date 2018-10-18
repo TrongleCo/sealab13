@@ -1,5 +1,5 @@
 /************
-* SEV Torch *
+* SEALAB *
 ************/
 /var/const/access_hangar = 73
 /datum/access/hangar
@@ -148,7 +148,7 @@
 	region = ACCESS_REGION_GENERAL
 
 /************
-* SEV Torch *
+* SEALAB *
 ************/
 
 /datum/access/robotics

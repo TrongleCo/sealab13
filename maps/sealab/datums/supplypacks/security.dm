@@ -1,59 +1,14 @@
 /decl/hierarchy/supply_pack/security
 	name = "Security"
 
-/decl/hierarchy/supply_pack/security/lightarmorsol
-	name = "Armor - SCG light"
-	contains = list(/obj/item/clothing/suit/armor/pcarrier/light/sol = 4,
-					/obj/item/clothing/head/helmet/solgov =4)
-	cost = 30
-	containertype = /obj/structure/closet/crate/secure
-	containername = "\improper SolGov light armor crate"
-	access = access_security
-
 /decl/hierarchy/supply_pack/security/secarmor
-	name = "Armor - Security"
-	contains = list(/obj/item/clothing/suit/armor/pcarrier/medium/security = 2,
-					/obj/item/clothing/head/helmet/solgov/security =2)
+	name = "Armor"
+	contains = list(/obj/item/clothing/suit/armor/vest/security = 2,
+					/obj/item/clothing/head/helmet =2)
 	cost = 20
 	containertype = /obj/structure/closet/crate/secure
 	containername = "\improper Security armor crate"
 	access = access_security
-
-/decl/hierarchy/supply_pack/security/solarmor
-	name = "Armor - Peacekeeper"
-	contains = list(/obj/item/clothing/suit/armor/pcarrier/blue/sol = 2,
-					/obj/item/clothing/head/helmet/solgov =2)
-	cost = 30
-	containertype = /obj/structure/closet/crate/secure
-	containername = "\improper Peacekeeper armor crate"
-	access = access_emergency_armory
-
-/decl/hierarchy/supply_pack/security/comarmor
-	name = "Armor - Command"
-	contains = list(/obj/item/clothing/suit/armor/pcarrier/medium/command = 2,
-					/obj/item/clothing/head/helmet/solgov/command =2)
-	cost = 20
-	containertype = /obj/structure/closet/crate/secure
-	containername = "\improper Command armor crate"
-	access = access_heads
-
-/decl/hierarchy/supply_pack/security/nanoarmor
-	name = "Armor - Corporate"
-	contains = list(/obj/item/clothing/suit/armor/pcarrier/medium/nt = 2,
-					/obj/item/clothing/head/helmet/nt/guard =2)
-	cost = 20
-	containertype = /obj/structure/closet/crate/secure
-	containername = "\improper Corporate armor crate"
-	access = access_nanotrasen
-
-/decl/hierarchy/supply_pack/security/lightnanoarmor
-	name = "Armor - Corporate light"
-	contains = list(/obj/item/clothing/suit/armor/pcarrier/light/nt = 2,
-					/obj/item/clothing/head/helmet/nt/guard =2)
-	cost = 15
-	containertype = /obj/structure/closet/crate/secure
-	containername = "\improper Corporate light armor crate"
-	access = access_nanotrasen
 
 /decl/hierarchy/supply_pack/security/pistol
 	name = "Weapons - Ballistic sidearms"
@@ -167,8 +122,8 @@
 	access = access_security
 
 /decl/hierarchy/supply_pack/security/cosextragear
-	name = "Gear - Chief of Security equipment"
-	contains = list(/obj/item/device/radio/headset/heads/cos,
+	name = "Gear - Head of Security equipment"
+	contains = list(/obj/item/device/radio/headset/heads/hos,
 					/obj/item/clothing/glasses/sunglasses/sechud/goggles,
 					/obj/item/taperoll/police,
 					/obj/item/weapon/storage/belt/holster/security,
@@ -178,7 +133,7 @@
 					/obj/item/device/flashlight/maglight,)
 	cost = 40
 	containertype = /obj/structure/closet/crate/secure
-	containername = "\improper Chief of Security equipment crate"
+	containername = "\improper Head of Security equipment crate"
 	access = access_hos
 
 /decl/hierarchy/supply_pack/security/practicelasers

@@ -1,48 +1,5 @@
 /*******************
-Random item spawning
-*******************/
-
-/obj/random/solgov
-	name = "random solgov equipment"
-	desc = "This is a random piece of solgov equipment or clothing."
-	icon = 'icons/obj/clothing/hats.dmi'
-	icon_state = "helmet_sol"
-
-/obj/random/solgov/spawn_choices()
-	return list(/obj/item/clothing/head/solgov/utility/fleet = 4,
-				/obj/item/clothing/head/soft/solgov/expedition = 2,
-				/obj/item/clothing/head/soft/solgov/fleet = 4,
-				/obj/item/clothing/head/helmet/solgov = 1,
-				/obj/item/clothing/suit/storage/vest/solgov = 2,
-				/obj/item/clothing/under/solgov/utility = 5,
-				/obj/item/clothing/under/solgov/utility/fleet = 3,
-				/obj/item/clothing/under/solgov/pt/expeditionary = 4,
-				/obj/item/clothing/under/solgov/pt/fleet = 4
-				)
-
-/obj/random/maintenance/solgov
-	name = "random maintenance item"
-	desc = "This is a random maintenance item."
-	icon = 'icons/obj/items.dmi'
-	icon_state = "gift1"
-
-/obj/random/maintenance/solgov/spawn_choices()
-	return list(/obj/random/junk = 4,
-				/obj/random/trash = 4,
-				/obj/random/maintenance/solgov/clean = 5)
-
-/obj/random/maintenance/solgov/clean
-	name = "random maintenance item"
-	desc = "This is a random maintenance item."
-	icon = 'icons/obj/items.dmi'
-	icon_state = "gift2"
-
-/obj/random/maintenance/solgov/clean/spawn_choices()
-	return list(/obj/random/solgov = 3,
-				/obj/random/maintenance/clean = 800)
-
-/*******************
-Torch specific items
+Sealab specific items
 *******************/
 
 /obj/item/modular_computer/pda/explorer
@@ -50,10 +7,10 @@ Torch specific items
 	icon_state_unpowered = "pda-exp"
 
 /obj/item/modular_computer/pda/heads/hop
-	stored_pen = /obj/item/weapon/pen/multi/cmd/xo
+	stored_pen = /obj/item/weapon/pen/multi/head/hop
 
-/obj/item/modular_computer/pda/captain
-	stored_pen = /obj/item/weapon/pen/multi/cmd/co
+/obj/item/modular_computer/pda/heads/administrator
+	stored_pen = /obj/item/weapon/pen/multi/head/administrator
 
 /obj/item/weapon/storage/backpack/explorer
 	name = "explorer backpack"
@@ -74,15 +31,15 @@ Torch specific items
 Unique items
 ***********/
 
-/obj/item/weapon/pen/multi/cmd/xo
-	name = "executive officer's pen"
-	icon = 'maps/torch/icons/obj/uniques.dmi'
+/obj/item/weapon/pen/multi/head/hop
+	name = "head of personnel's pen"
+	icon = 'maps/sealab/icons/obj/uniques.dmi'
 	icon_state = "pen_xo"
 	desc = "A slightly bulky pen with a silvery case. Twisting the top allows you to switch the nib for different colors."
 
-/obj/item/weapon/pen/multi/cmd/co
-	name = "commanding officer's pen"
-	icon = 'maps/torch/icons/obj/uniques.dmi'
+/obj/item/weapon/pen/multi/head/administrator
+	name = "administrator's pen"
+	icon = 'maps/sealab/icons/obj/uniques.dmi'
 	icon_state = "pen_co"
 	desc = "A slightly bulky pen with a golden case. Twisting the top allows you to switch the nib for different colors."
 
@@ -105,8 +62,7 @@ Unique items
 	max_storage_space = 4
 	startswith = list(
 			/obj/item/weapon/gun/projectile/pistol/liaison,
-			/obj/item/weapon/reagent_containers/pill/tox,
-			/obj/item/weapon/paper/liason_note
+			/obj/item/weapon/reagent_containers/pill/tox
 	)
 
 /******
@@ -115,9 +71,9 @@ Weapons
 
 /obj/item/weapon/gun/projectile/revolver/webley/captain
 	name = "\improper Final Argument"
-	icon = 'maps/torch/icons/obj/uniques.dmi'
+	icon = 'maps/sealab/icons/obj/uniques.dmi'
 	icon_state = "mosley"
-	desc = "A shiny al-Maliki & Mosley Autococker automatic revolver, with black accents. Marketed as the 'Revolver for the Modern Era'. Uses .44 magnum rounds. This one has 'To the Captain of SEV Torch' engraved."
+	desc = "A shiny al-Maliki & Mosley Autococker automatic revolver, with black accents. Marketed as the 'Revolver for the Modern Era'. Uses .44 magnum rounds. This one has 'To the Administrator of Sealab' engraved."
 	fire_delay = 5.7 //Autorevolver. Also synced with the animation
 	fire_anim = "mosley_fire"
 	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 2)

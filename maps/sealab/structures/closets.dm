@@ -1,5 +1,5 @@
 /*
- * Torch Excavation
+ * Sealab Excavation
  */
 
 /obj/structure/closet/toolcloset/excavation
@@ -38,21 +38,20 @@
 
 /obj/structure/closet/wardrobe/ptgear/WillContain()
 	return list(
-		/obj/item/clothing/under/solgov/pt/expeditionary = 4,
 		/obj/item/clothing/shoes/white = 2,
 		/obj/item/clothing/shoes/black = 2)
 
-/obj/random/torchcloset //Random closets taking into account torch-specific ones
+/obj/random/closet/sealab //Random closets taking into account sealab-specific ones
 	name = "random closet"
 	desc = "This is a random closet."
 	icon = 'icons/obj/closet.dmi'
 	icon_state = "syndicate1"
 
-/obj/random/torchcloset/spawn_choices()
+/obj/random/closet/sealab/spawn_choices()
 	return list(/obj/structure/closet,
 				/obj/structure/closet/firecloset,
 				/obj/structure/closet/emcloset,
-				/obj/structure/closet/jcloset_torch,
+				/obj/structure/closet/jcloset,
 				/obj/structure/closet/athletic_mixed,
 				/obj/structure/closet/toolcloset,
 				/obj/structure/closet/toolcloset/excavation,

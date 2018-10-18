@@ -44,13 +44,13 @@
 
 	away_site_budget = 3
 
-	id_hud_icons = 'maps/torch/icons/assignment_hud.dmi'
+	id_hud_icons = 'maps/sealab/icons/assignment_hud.dmi'
 	welcome_sound = 'sound/effects/welcome_tone.ogg'		// Sound played on roundstart
 
 /datum/map/sealab/setup_map()
 	..()
 	system_name = generate_system_name()
-	minor_announcement = new(new_sound = sound('sound/AI/torch/commandreport.ogg', volume = 45))
+	minor_announcement = new(new_sound = sound('sound/AI/commandreport.ogg', volume = 45))
 
 /datum/map/sealab/map_info(victim)
 	to_chat(victim, "<h2>Current map information</h2>")

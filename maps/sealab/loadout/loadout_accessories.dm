@@ -1,7 +1,3 @@
-/datum/gear/accessory/tags
-	display_name = "dog tags"
-	path = /obj/item/clothing/accessory/badge/solgov/tags
-
 /datum/gear/accessory/armband_security
 	allowed_roles = list(SECURITY_ROLES)
 
