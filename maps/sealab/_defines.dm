@@ -1,7 +1,7 @@
 // The following is a list of defs to be used for the Sealab loadout.
 
 // For members of the command department
-#define EXECUTIVE_ROLES /datum/job/administrator, /datum/job/hop, /datum/job/research/head, /datum/job/engineering/head, /datum/job/security/head, /datum/job/medical/head
+#define EXECUTIVE_ROLES /datum/job/executive/administrator, /datum/job/executive/hop, /datum/job/research/head, /datum/job/engineering/head, /datum/job/security/head, /datum/job/medical/head
 
 // For members of the research department and jobs that are scientific
 #define RESEARCH_ROLES /datum/job/research/head, /datum/job/research/senior, /datum/job/research/scientist, /datum/job/research/intern
@@ -43,10 +43,10 @@
 #define FOOD_ROLES /datum/job/service/bartender, /datum/job/service/chef
 
 // For jobs that spawn with weapons in their lockers
-#define ARMED_ROLES SECURITY_ROLES, /datum/job/captain, /datum/job/hop
+#define ARMED_ROLES SECURITY_ROLES, /datum/job/captain, /datum/job/executive/hop
 
 // For jobs that spawn with armor in their lockers
-#define ARMORED_ROLES SECURITY_ROLES, /datum/job/captain, /datum/job/hop
+#define ARMORED_ROLES SECURITY_ROLES, /datum/job/captain, /datum/job/executive/hop
 
 // Selectable corporate faction
 #define CORPORATION_FACTION /datum/faction/corporation/mmu

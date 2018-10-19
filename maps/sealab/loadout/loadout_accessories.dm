@@ -16,18 +16,6 @@
 /datum/gear/accessory/armband_hydro
 	allowed_roles = list(RESEARCH_ROLES)
 
-/datum/gear/accessory/armband_nt
-	allowed_branches = list(CORPORATION_FACTION)
-
-/datum/gear/accessory/ntaward
-	allowed_branches = list(CORPORATION_FACTION)
-
-/datum/gear/accessory/tie
-	allowed_branches = list(CORPORATION_FACTION)
-
-/datum/gear/accessory/tie_color
-	allowed_branches = list(CORPORATION_FACTION)
-
 /datum/gear/accessory/stethoscope
 	allowed_roles = list(STERILE_ROLES)
 
@@ -60,21 +48,15 @@
 
 /datum/gear/clothing/hawaii
 	allowed_roles = list(SEMIFORMAL_ROLES)
-	allowed_branches = list(CORPORATION_FACTION)
 
 /datum/gear/clothing/scarf
 	allowed_roles = list(SEMIFORMAL_ROLES)
 
 /datum/gear/clothing/flannel
 	allowed_roles = list(SEMIFORMAL_ROLES)
-	allowed_branches = list(CORPORATION_FACTION)
 
 /datum/gear/clothing/vest
 	allowed_roles = list(FORMAL_ROLES)
-	allowed_branches = list(CORPORATION_FACTION)
-
-/datum/gear/clothing/suspenders
-	allowed_branches = list(CORPORATION_FACTION)
 
 /datum/gear/clothing/wcoat
 	allowed_roles = list(FORMAL_ROLES)
@@ -82,26 +64,5 @@
 /datum/gear/clothing/zhongshan
 	allowed_roles = list(FORMAL_ROLES)
 
-/datum/gear/clothing/dashiki
-	allowed_branches = list(CORPORATION_FACTION)
-
-/datum/gear/clothing/thawb
-	allowed_branches = list(CORPORATION_FACTION)
-
 /datum/gear/clothing/sherwani
 	allowed_roles = list(FORMAL_ROLES)
-
-/datum/gear/clothing/qipao
-	allowed_branches = list(CORPORATION_FACTION)
-
-/datum/gear/clothing/sweater
-	allowed_branches = list(CORPORATION_FACTION)
-
-/datum/gear/clothing/tangzhuang
-	allowed_branches = list(CORPORATION_FACTION)
-
-/datum/gear/accessory/bowtie
-	allowed_branches = list(CORPORATION_FACTION)
-
-/datum/gear/accessory/ftupin
-	allowed_branches = list(CORPORATION_FACTION)

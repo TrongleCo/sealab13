@@ -1,11 +1,9 @@
 /datum/map/sealab
-	species_to_job_whitelist = list(
-		/datum/species/adherent = list(),
-		/datum/species/nabber = list(),
-		/datum/species/vox = list()
-	)
-
+	// haha xeno scum
 	species_to_job_blacklist = list(
+		/datum/species/adherent = list(ALL_ROLES),
+		/datum/species/nabber = list(ALL_ROLES),
+		/datum/species/vox = list(ALL_ROLES),
 		/datum/species/unathi  = list(ALL_ROLES),
 		/datum/species/skrell  = list(ALL_ROLES),
 		/datum/species/diona   = list(ALL_ROLES),
@@ -14,30 +12,24 @@
 
 	allowed_jobs = list(ALL_ROLES)
 
-/datum/map/sealab/setup_map()
-	..()
-	for(var/job_type in GLOB.using_map.allowed_jobs)
-		var/datum/job/job = decls_repository.get_decl(job_type)
-		// Most species are restricted from SCG security and command roles
-		if((job.department_flag & (COM)) && job.allowed_branches.len && !(/datum/faction/corporation/mmu in job.allowed_branches))
-			for(var/species_name in list(SPECIES_IPC, SPECIES_SKRELL, SPECIES_UNATHI))
-				var/datum/species/S = all_species[species_name]
-				var/species_blacklist = species_to_job_blacklist[S.type]
-				if(!species_blacklist)
-					species_blacklist = list()
-					species_to_job_blacklist[S.type] = species_blacklist
-				species_blacklist |= job.type
 
-/datum/job/administrator
+/* ------ EXECUTIVES ------ */
+
+/datum/job/executive
+	department = "Command"
+	department_flag = COM
+
+/datum/job/executive/administrator
 	title = "Administrator"
 	supervisors = "the corporate board and investors"
+
+	total_positions = 1
+	spawn_positions = 1
+
 	minimal_player_age = 7
 	economic_power = 15
 	ideal_character_age = 50
 	outfit_type = /decl/hierarchy/outfit/job/sealab/faculty/executive/administrator
-
-	allowed_branches = list(/datum/faction/corporation/mmu)
-	allowed_ranks = list(/datum/job_rank/corporate/executive)
 
 	min_skill = list(   SKILL_BUREAUCRACY = SKILL_BASIC,
 	                    SKILL_SCIENCE     = SKILL_ADEPT,
@@ -53,20 +45,20 @@
 							 /datum/computer_file/program/reports)
 	required_education = EDUCATION_TIER_BACHELOR
 
-/datum/job/administrator/get_description_blurb()
+/datum/job/executive/administrator/get_description_blurb()
 	return "You are the Administrator. You are the top dog. You are an experienced professional and ultimately responsible for all that happens in the facility. Your job is to make sure [GLOB.using_map.full_name] operates smoothly and completes its research goals. Delegate to the executives under you to effectively manage the facility, and listen to and trust their expertise."
 
-/datum/job/hop
+/datum/job/executive/hop
 	title = "Head of Personnel"
 	supervisors = "the Administrator"
-	department = "Command"
-	department_flag = COM
+
+	total_positions = 1
+	spawn_positions = 1
+
 	minimal_player_age = 7
 	economic_power = 10
 	ideal_character_age = 45
 	outfit_type = /decl/hierarchy/outfit/job/sealab/faculty/executive/hop
-	allowed_branches = list(/datum/faction/corporation/mmu)
-	allowed_ranks = list(/datum/job_rank/corporate/executive)
 
 	min_skill = list(   SKILL_BUREAUCRACY = SKILL_ADEPT,
 	                    SKILL_COMPUTER    = SKILL_BASIC,
@@ -103,22 +95,26 @@
 							 /datum/computer_file/program/reports)
 	required_education = EDUCATION_TIER_BACHELOR
 
-/datum/job/hop/get_description_blurb()
+/datum/job/executive/hop/get_description_blurb()
 	return "You are the Head of Personnel. You are the right-hand man of the Administrator. In his absence, you are expected to take his place. Your primary duty is directly managing department heads and all those outside a department heading."
 
 
 /* ------ RESEARCH ------ */
+/datum/job/research
+	department = "Science"
+	department_flag = SCI
 
 /datum/job/research/head
 	title = "Research Director"
 	supervisors = "the Head of Personnel and the Administrator"
+
+	total_positions = 1
+	spawn_positions = 1
+
 	economic_power = 20
 	minimal_player_age = 7
 	ideal_character_age = 60
 	outfit_type = /decl/hierarchy/outfit/job/sealab/faculty/executive/rd
-
-	allowed_branches = list(/datum/faction/corporation/mmu)
-	allowed_ranks = list(/datum/job_rank/corporate/executive)
 
 	min_skill = list(   SKILL_BUREAUCRACY = SKILL_ADEPT,
 	                    SKILL_COMPUTER    = SKILL_BASIC,
@@ -150,11 +146,10 @@
 
 /datum/job/research/senior
 	title = "Senior Researcher"
-	department = "Science"
-	department_flag = SCI
 
-	total_positions = 1
-	spawn_positions = 1
+	total_positions = 6
+	spawn_positions = 6
+
 	supervisors = "the Research Director"
 	selection_color = "#633d63"
 	economic_power = 12
@@ -164,12 +159,6 @@
 		"Research Supervisor"
 	)
 	outfit_type = /decl/hierarchy/outfit/job/sealab/faculty/research/senior_scientist
-
-	allowed_branches = list(/datum/faction/corporation/mmu)
-	allowed_ranks = list(
-		/datum/job_rank/corporate/executive,
-		/datum/job_rank/corporate/employee
-	)
 
 	access = list(access_tox, access_tox_storage, access_research, access_mining, access_mining_office,
 						access_mining_station, access_xenobiology, access_xenoarch, access_nanotrasen,
@@ -190,8 +179,10 @@
 
 /datum/job/research/scientist
 	title = "Scientist"
+
 	total_positions = 6
 	spawn_positions = 6
+
 	supervisors = "the Research Director"
 	economic_power = 10
 	ideal_character_age = 45
@@ -204,9 +195,6 @@
 		"Researcher"
 	)
 	outfit_type = /decl/hierarchy/outfit/job/sealab/faculty/research/scientist
-
-	allowed_branches = list(/datum/faction/corporation/mmu)
-	allowed_ranks = list(/datum/job_rank/corporate/employee)
 
 	min_skill = list(   SKILL_BUREAUCRACY = SKILL_BASIC,
 	                    SKILL_COMPUTER    = SKILL_BASIC,
@@ -226,11 +214,10 @@
 
 /datum/job/research/intern
 	title = "Research Assistant"
-	department = "Science"
-	department_flag = SCI
 
-	total_positions = 4
-	spawn_positions = 4
+	total_positions = 10
+	spawn_positions = 10
+
 	supervisors = "the Research Director and science personnel"
 	selection_color = "#633d63"
 	economic_power = 3
@@ -242,9 +229,6 @@
 
 	outfit_type = /decl/hierarchy/outfit/job/sealab/faculty/research/intern
 
-	allowed_branches = list(/datum/faction/corporation/mmu)
-	allowed_ranks = list(/datum/job_rank/corporate/intern)
-
 	max_skill = list(   SKILL_ANATOMY     = SKILL_MAX,
 	                    SKILL_DEVICES     = SKILL_MAX,
 	                    SKILL_SCIENCE     = SKILL_MAX)
@@ -255,16 +239,21 @@
 
 /* ------ ENGINEERING ------ */
 
+/datum/job/engineering
+	department = "Engineering"
+	department_flag = ENG
+
 /datum/job/engineering/head
 	title = "Chief Engineer"
+
+	total_positions = 1
+	spawn_positions = 1
+
 	supervisors = "the Head of Personnel and the Administrator"
 	economic_power = 9
 	ideal_character_age = 40
 	minimal_player_age = 7
 	outfit_type = /decl/hierarchy/outfit/job/sealab/faculty/executive/chief_engineer
-
-	allowed_branches = list(/datum/faction/corporation/mmu)
-	allowed_ranks = list(/datum/job_rank/corporate/executive)
 
 	min_skill = list(   SKILL_BUREAUCRACY  = SKILL_BASIC,
 	                    SKILL_COMPUTER     = SKILL_ADEPT,
@@ -308,23 +297,16 @@
 
 /datum/job/engineering/senior
 	title = "Senior Engineer"
-	department = "Engineering"
-	department_flag = ENG
 
-	total_positions = 1
-	spawn_positions = 1
+	total_positions = 6
+	spawn_positions = 6
+
 	supervisors = "the Chief Engineer"
 	selection_color = "#5b4d20"
 	economic_power = 6
 	minimal_player_age = 3
 	ideal_character_age = 40
 	outfit_type = /decl/hierarchy/outfit/job/sealab/faculty/engineering/senior
-
-	allowed_branches = list(/datum/faction/corporation/mmu)
-	allowed_ranks = list(
-		/datum/job_rank/corporate/executive,
-		/datum/job_rank/corporate/employee
-	)
 
 	min_skill = list(   SKILL_COMPUTER     = SKILL_BASIC,
 	                    SKILL_EVA          = SKILL_ADEPT,
@@ -358,8 +340,10 @@
 
 /datum/job/engineering/engineer
 	title = "Engineer"
-	total_positions = 4
-	spawn_positions = 4
+
+	total_positions = 6
+	spawn_positions = 6
+
 	supervisors = "the Chief Engineer"
 	economic_power = 5
 	minimal_player_age = 0
@@ -371,9 +355,6 @@
 		"Atmospheric Technician"
 	)
 	outfit_type = /decl/hierarchy/outfit/job/sealab/faculty/engineering/engineer
-
-	allowed_branches = list(/datum/faction/corporation/mmu)
-	allowed_ranks = list(/datum/job_rank/corporate/employee)
 
 	min_skill = list(   SKILL_COMPUTER     = SKILL_BASIC,
 	                    SKILL_EVA          = SKILL_BASIC,
@@ -408,11 +389,10 @@
 
 /datum/job/engineering/intern
 	title = "Engineering Intern"
-	department = "Engineering"
-	department_flag = ENG
 
-	total_positions = 2
-	spawn_positions = 2
+	total_positions = 10
+	spawn_positions = 10
+
 	supervisors = "the Chief Engineer and engineering personnel"
 	selection_color = "#5b4d20"
 	ideal_character_age = 20
@@ -421,9 +401,6 @@
 	)
 
 	outfit_type = /decl/hierarchy/outfit/job/sealab/faculty/engineering/intern
-
-	allowed_branches = list(/datum/faction/corporation/mmu)
-	allowed_ranks = list(/datum/job_rank/corporate/intern)
 
 	skill_points = 4
 	no_skill_buffs = TRUE
@@ -461,16 +438,21 @@
 
 /* ------ SECURITY ------ */
 
+/datum/job/security
+	department = "Security"
+	department_flag = SEC
+
 /datum/job/security/head
 	title = "Head of Security"
+
+	total_positions = 1
+	spawn_positions = 1
+
 	supervisors = "the Head of Personnel and the Administrator"
 	economic_power = 8
 	minimal_player_age = 7
 	ideal_character_age = 35
 	outfit_type = /decl/hierarchy/outfit/job/sealab/faculty/executive/hos
-
-	allowed_branches = list(/datum/faction/corporation/mmu)
-	allowed_ranks = list(/datum/job_rank/corporate/executive)
 
 	min_skill = list(   SKILL_BUREAUCRACY = SKILL_ADEPT,
 	                    SKILL_EVA         = SKILL_BASIC,
@@ -501,23 +483,16 @@
 
 /datum/job/security/guard
 	title = "Security Guard"
-	department = "Security"
-	department_flag = SEC
 
-	total_positions = 2
-	spawn_positions = 2
+	total_positions = 10
+	spawn_positions = 10
+
 	supervisors = "the Head of Security"
 	selection_color = "#633d63"
 	economic_power = 6
 	minimal_player_age = 0
 	ideal_character_age = 25
 	outfit_type = /decl/hierarchy/outfit/job/sealab/faculty/security/guard
-
-	allowed_branches = list(/datum/faction/corporation/mmu)
-	allowed_ranks = list(
-		/datum/job_rank/corporate/executive,
-		/datum/job_rank/corporate/employee
-	)
 
 	min_skill = list(   SKILL_COMBAT  = SKILL_BASIC,
 	                    SKILL_WEAPONS = SKILL_BASIC)
@@ -533,11 +508,10 @@
 
 /datum/job/security/detective
 	title = "Detective"
-	department = "Security"
-	department_flag = SEC
 
-	total_positions = 1
-	spawn_positions = 1
+	total_positions = 3
+	spawn_positions = 3
+
 	supervisors = "the Head of Security"
 	economic_power = 5
 	minimal_player_age = 7
@@ -548,12 +522,6 @@
 		"Criminal Investigator"
 	)
 	outfit_type = /decl/hierarchy/outfit/job/sealab/faculty/security/detective
-
-	allowed_branches = list(/datum/faction/corporation/mmu)
-	allowed_ranks = list(
-		/datum/job_rank/corporate/executive,
-		/datum/job_rank/corporate/employee
-	)
 
 	min_skill = list(   SKILL_BUREAUCRACY = SKILL_BASIC,
 	                    SKILL_COMPUTER    = SKILL_BASIC,
@@ -578,20 +546,16 @@
 
 /datum/job/security/intern
 	title = "Security Cadet"
-	department = "Security"
-	department_flag = SEC
 
-	total_positions = 2
-	spawn_positions = 2
+	total_positions = 10
+	spawn_positions = 10
+
 	supervisors = "the Head of Security and security personnel"
 	selection_color = "#633d63"
 	economic_power = 6
 	minimal_player_age = 0
 	ideal_character_age = 25
 	outfit_type = /decl/hierarchy/outfit/job/sealab/faculty/security/intern
-
-	allowed_branches = list(/datum/faction/corporation/mmu)
-	allowed_ranks = list(/datum/job_rank/corporate/intern)
 
 	min_skill = list(   SKILL_COMBAT  = SKILL_BASIC,
 	                    SKILL_WEAPONS = SKILL_BASIC)
@@ -608,16 +572,21 @@
 
 /* ------ MEDICAL ------ */
 
+/datum/job/medical
+	department = "Medical"
+	department_flag = MED
+
 /datum/job/medical/head
 	title = "Chief Medical Officer"
+
+	total_positions = 1
+	spawn_positions = 1
+
 	supervisors = "the Head of Personnel and the Administrator"
 	economic_power = 10
 	minimal_player_age = 7
 	ideal_character_age = 48
 	outfit_type = /decl/hierarchy/outfit/job/sealab/faculty/executive/cmo
-
-	allowed_branches = list(/datum/faction/corporation/mmu)
-	allowed_ranks = list(/datum/job_rank/corporate/executive)
 
 	min_skill = list(   SKILL_BUREAUCRACY = SKILL_BASIC,
 	                    SKILL_MEDICAL     = SKILL_ADEPT,
@@ -649,14 +618,13 @@
 
 /datum/job/medical/senior
 	title = "Senior Doctor"
-	department = "Medical"
-	department_flag = MED
 
+	total_positions = 6
+	spawn_positions = 6
+
+	supervisors = "the Chief Medical Officer"
 	minimal_player_age = 2
 	ideal_character_age = 45
-	total_positions = 2
-	spawn_positions = 2
-	supervisors = "the Chief Medical Officer"
 	selection_color = "#013d3b"
 	economic_power = 8
 	alt_titles = list(
@@ -665,12 +633,6 @@
 		"Trauma Surgeon"
 	)
 	outfit_type = /decl/hierarchy/outfit/job/sealab/faculty/medical/senior
-
-	allowed_branches = list(/datum/faction/corporation/mmu)
-	allowed_ranks = list(
-		/datum/job_rank/corporate/executive,
-		/datum/job_rank/corporate/employee
-	)
 
 	min_skill = list(   SKILL_BUREAUCRACY = SKILL_BASIC,
 	                    SKILL_MEDICAL     = SKILL_ADEPT,
@@ -694,8 +656,10 @@
 
 /datum/job/medical/doctor
 	title = "Doctor"
-	total_positions = 3
-	spawn_positions = 3
+
+	total_positions = 6
+	spawn_positions = 6
+
 	supervisors = "the Chief Medical Officer"
 	economic_power = 7
 	ideal_character_age = 40
@@ -705,9 +669,6 @@
 		"Medical Technician"
 	)
 	outfit_type = /decl/hierarchy/outfit/job/sealab/faculty/medical/doctor
-
-	allowed_branches = list(/datum/faction/corporation/mmu)
-	allowed_ranks = list(/datum/job_rank/corporate/employee)
 
 	min_skill = list(   SKILL_EVA     = SKILL_BASIC,
 	                    SKILL_MEDICAL = SKILL_BASIC,
@@ -729,11 +690,10 @@
 
 /datum/job/medical/intern
 	title = "Medical Resident"
-	department = "Medical"
-	department_flag = MED
 
-	total_positions = 2
-	spawn_positions = 2
+	total_positions = 10
+	spawn_positions = 10
+
 	supervisors = "the Chief Medical Officer and medical personnel"
 	selection_color = "#013d3b"
 	ideal_character_age = 20
@@ -744,9 +704,6 @@
 	)
 
 	outfit_type = /decl/hierarchy/outfit/job/sealab/faculty/medical/intern
-
-	allowed_branches = list(/datum/faction/corporation/mmu)
-	allowed_ranks = list(/datum/job_rank/corporate/intern)
 
 	skill_points = 4
 	no_skill_buffs = TRUE
@@ -771,23 +728,21 @@
 
 /* ------ CARGONIA ------ */
 
-/datum/job/supply/qm
-	title = "Quartermaster"
+/datum/job/supply
 	department = "Supply"
 	department_flag = SUP
+
+/datum/job/supply/qm
+	title = "Quartermaster"
+
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the Executive Officer"
+
+	supervisors = "the Head of Personnel and the Administrator"
 	economic_power = 5
 	minimal_player_age = 0
 	ideal_character_age = 35
 	outfit_type = /decl/hierarchy/outfit/job/sealab/faculty/supply/quartermaster
-
-	allowed_branches = list(/datum/faction/corporation/mmu)
-	allowed_ranks = list(
-		/datum/job_rank/corporate/executive,
-		/datum/job_rank/corporate/employee
-	)
 
 	min_skill = list(   SKILL_BUREAUCRACY = SKILL_ADEPT,
 	                    SKILL_FINANCE     = SKILL_BASIC,
@@ -809,11 +764,10 @@
 
 /datum/job/supply/cargo_tech
 	title = "Cargo Technician"
-	department = "Supply"
-	department_flag = SUP
-	total_positions = 2
-	spawn_positions = 2
-	supervisors = "the Deck Chief and Executive Officer"
+
+	total_positions = 12
+	spawn_positions = 12
+	supervisors = "the Quartermaster"
 	ideal_character_age = 24
 	alt_titles = list(
 		"Mailroom Clerk",
@@ -822,13 +776,6 @@
 	)
 
 	outfit_type = /decl/hierarchy/outfit/job/sealab/faculty/supply/cargo_tech
-
-	allowed_branches = list(/datum/faction/corporation/mmu)
-	allowed_ranks = list(
-		/datum/job_rank/corporate/executive,
-		/datum/job_rank/corporate/employee,
-		/datum/job_rank/corporate/intern
-	)
 
 	min_skill = list(   SKILL_BUREAUCRACY = SKILL_BASIC,
 	                    SKILL_FINANCE     = SKILL_BASIC,
@@ -848,24 +795,20 @@
 
 /* ------ SERVICE ------ */
 
-/datum/job/service/janitor
-	title = "Janitor"
+/datum/job/service
 	department = "Service"
 	department_flag = SRV
 
+/datum/job/service/janitor
+	title = "Janitor"
+
 	total_positions = 2
 	spawn_positions = 2
+
 	supervisors = "the Head of Personnel"
 	ideal_character_age = 20
 
 	outfit_type = /decl/hierarchy/outfit/job/sealab/faculty/service/janitor
-
-	allowed_branches = list(/datum/faction/corporation/mmu)
-	allowed_ranks = list(
-		/datum/job_rank/corporate/executive,
-		/datum/job_rank/corporate/employee,
-		/datum/job_rank/corporate/intern
-	)
 
 	min_skill = list(   SKILL_HAULING = SKILL_BASIC)
 
@@ -875,23 +818,16 @@
 
 /datum/job/service/chef
 	title = "Cook"
-	department = "Service"
-	department_flag = SRV
-	total_positions = 1
-	spawn_positions = 1
+
+	total_positions = 3
+	spawn_positions = 3
+
 	supervisors = "the Head of Personnel"
 	alt_titles = list(
 		"Chef",
 		"Farmer"
 	)
 	outfit_type = /decl/hierarchy/outfit/job/sealab/faculty/service/cook
-
-	allowed_branches = list(/datum/faction/corporation/mmu)
-	allowed_ranks = list(
-		/datum/job_rank/corporate/executive,
-		/datum/job_rank/corporate/employee,
-		/datum/job_rank/corporate/intern
-	)
 
 	min_skill = list(   SKILL_COOKING   = SKILL_ADEPT,
 	                    SKILL_BOTANY    = SKILL_BASIC,
@@ -902,19 +838,14 @@
 
 /datum/job/service/bartender
 	title = "Bartender"
-	department = "Service"
-	department_flag = SRV
+
+	total_positions = 1
+	spawn_positions = 1
+
 	supervisors = "the Head of Personnel"
 	ideal_character_age = 30
 	selection_color = "#515151"
 	outfit_type = /decl/hierarchy/outfit/job/sealab/faculty/service/bartender
-
-	allowed_branches = list(/datum/faction/corporation/mmu)
-	allowed_ranks = list(
-		/datum/job_rank/corporate/executive,
-		/datum/job_rank/corporate/employee,
-		/datum/job_rank/corporate/intern
-	)
 
 	access = list(access_hydroponics, access_bar, access_solgov_crew, access_kitchen, access_commissary)
 	minimal_access = list()
@@ -925,11 +856,9 @@
 
 /datum/job/service/intern
 	title = "Intern"
-	department = "Service"
-	department_flag = SRV
 
-	total_positions = 5
-	spawn_positions = 5
+	total_positions = 100
+	spawn_positions = 100
 	supervisors = "the Head of Personnel"
 	selection_color = "#515151"
 	ideal_character_age = 20
@@ -939,18 +868,11 @@
 	)
 	outfit_type = /decl/hierarchy/outfit/job/sealab/faculty/service/intern
 
-	allowed_branches = list(/datum/faction/corporation/mmu)
-	allowed_ranks = list(
-		/datum/job_rank/corporate/executive,
-		/datum/job_rank/corporate/employee,
-		/datum/job_rank/corporate/intern
-	)
-
 	access = list(access_maint_tunnels, access_emergency_storage, access_solgov_crew)
 	required_education = EDUCATION_TIER_BASIC
 
 /datum/job/cyborg
-	total_positions = 3
-	spawn_positions = 3
+	total_positions = 6
+	spawn_positions = 6
 	supervisors = "your laws"
 	minimal_player_age = 0

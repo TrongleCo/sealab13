@@ -3,7 +3,6 @@
 
 	#include "areas.dm"
 	#include "lobby.dm"
-	#include "ranks.dm"
 	#include "presets.dm"
 
 	#include "datums/uniforms.dm"

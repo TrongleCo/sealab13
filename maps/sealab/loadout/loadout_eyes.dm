@@ -1,9 +1,3 @@
-/datum/gear/eyes/eyepatch
-	allowed_branches = list(CORPORATION_FACTION)
-
-/datum/gear/eyes/fashionglasses
-	allowed_branches = list(CORPORATION_FACTION)
-
 /datum/gear/eyes/sciencegoggles
 	allowed_roles = list(RESEARCH_ROLES)
 

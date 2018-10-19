@@ -29,10 +29,9 @@
 	var/dress_gloves = null
 	var/dress_extra = null
 
-decl/hierarchy/uniform/civilian
-	name = "Master civilian outfit"		//Basically just here for the rent-a-tux, ahem, I mean... dress uniform.
-	hierarchy_type = /decl/hierarchy/uniform/civilian
-	branch = /datum/faction/corporation/mmu
+/decl/hierarchy/uniform/formal
+	name = "Formal outfit"		//Basically just here for the rent-a-tux, ahem, I mean... dress uniform.
+	hierarchy_type = /decl/hierarchy/uniform/formal
 
 	dress_under = /obj/item/clothing/under/rank/internalaffairs/plain
 	dress_over = /obj/item/clothing/suit/storage/toggle/suit/black

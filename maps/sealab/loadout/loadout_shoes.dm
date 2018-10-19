@@ -22,6 +22,3 @@
 
 /datum/gear/shoes/high
 	allowed_roles = list(FORMAL_ROLES)
-
-/datum/gear/shoes/sandal
-	allowed_branches = list(CORPORATION_FACTION)

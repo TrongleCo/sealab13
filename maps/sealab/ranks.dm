@@ -1,3 +1,5 @@
+// Not used at the moment
+
 /datum/job/submap
 	branch = /datum/faction/corporation/mmu
 	rank =   /datum/job_rank/corporate/intern

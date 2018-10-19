@@ -4,24 +4,6 @@
 /datum/gear/head/whitentberet
 	allowed_roles = list(/datum/job/security/guard)
 
-/datum/gear/head/beret
-	allowed_branches = list(CORPORATION_FACTION)
-
-/datum/gear/mask/bandana
-	allowed_branches = list(CORPORATION_FACTION)
-
-/datum/gear/head/bandana
-	allowed_branches = list(CORPORATION_FACTION)
-
-/datum/gear/head/bow
-	allowed_branches = list(CORPORATION_FACTION)
-
-/datum/gear/head/cap
-	allowed_branches = list(CORPORATION_FACTION)
-
-/datum/gear/head/hairflower
-	allowed_branches = list(CORPORATION_FACTION)
-
 /datum/gear/head/hardhat
 	allowed_roles = list(TECHNICAL_ROLES)
 

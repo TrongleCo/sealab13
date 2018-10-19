@@ -1,9 +1,3 @@
-/datum/gear/suit/blueapron
-	allowed_branches = list(CORPORATION_FACTION)
-
-/datum/gear/suit/overalls
-	allowed_branches = list(CORPORATION_FACTION)
-
 /datum/gear/suit/medcoat
 	allowed_roles = list(MEDICAL_ROLES)
 
@@ -43,12 +37,6 @@
 /datum/gear/suit/labcoat
 	allowed_roles = list(STERILE_ROLES)
 
-/datum/gear/suit/coat
-	allowed_branches = list(CORPORATION_FACTION)
-
-/datum/gear/suit/leather
-	allowed_branches = list(CORPORATION_FACTION)
-
 /datum/gear/suit/wintercoat
 	allowed_roles = list(INFORMAL_ROLES)
 
@@ -65,7 +53,6 @@
 /datum/gear/tactical/pcarrier/misc
 	display_name = "miscellaneous plate carrier selection"
 	allowed_roles = list(ARMORED_ROLES)
-	allowed_branches = list(CORPORATION_FACTION)
 
 /datum/gear/tactical/pcarrier/misc/New()
 	..()

@@ -1,6 +1,3 @@
-/datum/gear/suit/lab_xyn_machine
-	allowed_branches = list(CORPORATION_FACTION)
-
 /datum/gear/gloves/dress/modified
 	display_name = "modified gloves, dress"
 	path = /obj/item/clothing/gloves/color/white/modified
@@ -12,6 +9,3 @@
 	path = /obj/item/clothing/gloves/duty/modified
 	sort_category = "Xenowear"
 	whitelisted = list(SPECIES_UNATHI)
-
-/datum/gear/suit/unathi/savage_hunter
-	allowed_branches = list(CORPORATION_FACTION)

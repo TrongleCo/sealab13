@@ -2,7 +2,7 @@
 	name = "Sealab"
 	full_name = "Sealab"
 	path = "sealab"
-	flags = MAP_HAS_BRANCH | MAP_HAS_RANK
+	flags = 0
 
 	station_levels = list(1)
 	contact_levels = list(1)
@@ -10,7 +10,7 @@
 	admin_levels = list()
 	empty_levels = list()
 
-	accessible_z_levels = list("1"=1,"2"=1,"3"=1,"4"=1,"5"=1,"8"=30)
+	accessible_z_levels = list("1"=1)
 	overmap_size = 35
 	overmap_event_areas = 34
 	usable_email_tlds = list("omail.net", "mmu.net")
@@ -39,7 +39,7 @@
 
 	default_law_type = /datum/ai_laws/solgov
 	use_overmap = 1
-	num_exoplanets = 1
+	num_exoplanets = 0
 	planet_size = list(129,129)
 
 	away_site_budget = 3
