@@ -7,6 +7,7 @@
 
 	#include "datums/uniforms.dm"
 	#include "datums/reports.dm"
+	#include "datums/spawnpoints.dm"
 	#include "datums/shackle_law_sets.dm"
 	#include "datums/supplypacks/security.dm"
 	#include "datums/supplypacks/science.dm"

@@ -47,6 +47,8 @@
 	id_hud_icons = 'maps/sealab/icons/assignment_hud.dmi'
 	welcome_sound = 'sound/effects/welcome_tone.ogg'		// Sound played on roundstart
 
+	species_to_rank_whitelist = list()
+
 /datum/map/sealab/setup_map()
 	..()
 	system_name = generate_system_name()

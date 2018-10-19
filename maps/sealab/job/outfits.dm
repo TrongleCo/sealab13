@@ -31,8 +31,8 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 /decl/hierarchy/outfit/job/sealab/faculty/executive/administrator
 	name = OUTFIT_JOB_NAME("Administrator")
 	glasses = /obj/item/clothing/glasses/sunglasses
-	uniform = /obj/item/clothing/under/lawyer
-	shoes = /obj/item/clothing/shoes/brown
+	uniform = /obj/item/clothing/under/suit_jacket/navy
+	shoes = /obj/item/clothing/shoes/laceup
 	l_ear = /obj/item/device/radio/headset/heads/administrator
 	id_type = /obj/item/weapon/card/id/sealab/gold
 	pda_type = /obj/item/modular_computer/pda/captain
