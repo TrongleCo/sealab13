@@ -382,7 +382,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 
 /decl/hierarchy/outfit/job/sealab/faculty/service/intern
 	name = OUTFIT_JOB_NAME("Intern")
-	uniform = /obj/item/clothing/under/color/blue
+	uniform = /obj/item/clothing/under/sealab/intern
 	shoes = /obj/item/clothing/shoes/black
 	id_type = /obj/item/weapon/card/id/sealab/faculty/intern
 	pda_type = /obj/item/modular_computer/pda

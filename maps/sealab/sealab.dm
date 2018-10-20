@@ -21,6 +21,8 @@
 	#include "items/stamps.dm"
 	#include "items/uniform_vendor.dm"
 
+	#include "items/clothing/under.dm"
+
 	#include "job/access.dm"
 	#include "job/jobs.dm"
 	#include "job/outfits.dm"
