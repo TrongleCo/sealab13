@@ -20,7 +20,6 @@
 	#include "items/manuals.dm"
 	#include "items/stamps.dm"
 	#include "items/uniform_vendor.dm"
-	#include "items/rigs.dm"
 
 	#include "job/access.dm"
 	#include "job/jobs.dm"
