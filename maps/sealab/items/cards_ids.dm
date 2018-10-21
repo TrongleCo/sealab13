@@ -7,33 +7,39 @@
 	item_state = "card-id"
 	job_access_type = /datum/job/service/intern
 
-/obj/item/weapon/card/id/sealab/silver
-	desc = "A silver identification card belonging to heads of staff."
+/obj/item/weapon/card/id/sealab/executive
+	desc = "A silver identification card belonging to executives."
 	icon_state = "silver"
 	item_state = "silver_id"
 	job_access_type = /datum/job/hop
 
-/obj/item/weapon/card/id/sealab/gold
-	desc = "A golden identification card belonging to the Commanding Officer."
+/obj/item/weapon/card/id/sealab/executive/hop
+	desc = "A silver identification card belonging to the head of personnel."
+	icon_state = "silver"
+	item_state = "silver_id"
+	job_access_type = /datum/job/hop
+
+/obj/item/weapon/card/id/sealab/executive/administrator
+	desc = "A golden identification card belonging to the administrator."
 	icon_state = "gold"
 	item_state = "gold_id"
 	job_access_type = /datum/job/captain
 
-/obj/item/weapon/card/id/sealab/captains_spare
-	name = "commanding officer's spare ID"
-	desc = "The skipper's spare ID."
+/obj/item/weapon/card/id/sealab/executive/administrator/spare
+	name = "administrator's spare ID"
+	desc = "A spare golden identification card belonging to the administrator."
 	icon_state = "gold"
 	item_state = "gold_id"
-	registered_name = "Commanding Officer"
-	assignment = "Commanding Officer"
+	registered_name = "Administrator"
+	assignment = "Administrator"
 
-/obj/item/weapon/card/id/sealab/captains_spare/New()
+/obj/item/weapon/card/id/sealab/gold/spare/New()
 	access = get_all_station_access()
 	..()
 
 /* ------ RESEARCH ------ */
 
-/obj/item/weapon/card/id/sealab/silver/rd
+/obj/item/weapon/card/id/sealab/executive/rd
 	job_access_type = /datum/job/research/head
 
 /obj/item/weapon/card/id/sealab/faculty/research/senior
@@ -48,7 +54,7 @@
 
 /* ------ MEDICAL ------ */
 
-/obj/item/weapon/card/id/sealab/silver/cmo
+/obj/item/weapon/card/id/sealab/executive/cmo
 	job_access_type = /datum/job/medical/head
 
 /obj/item/weapon/card/id/sealab/faculty/medical/senior
@@ -63,7 +69,7 @@
 
 /* ------ SECURITY ------ */
 
-/obj/item/weapon/card/id/sealab/silver/hos
+/obj/item/weapon/card/id/sealab/executive/hos
 	job_access_type = /datum/job/security/head
 
 /obj/item/weapon/card/id/sealab/faculty/security/guard
@@ -77,7 +83,7 @@
 
 /* ------ ENGINEERING ------ */
 
-/obj/item/weapon/card/id/sealab/silver/engineering
+/obj/item/weapon/card/id/sealab/executive/engineering
 	job_access_type = /datum/job/engineering/head
 
 /obj/item/weapon/card/id/sealab/faculty/engineering/senior
@@ -92,7 +98,7 @@
 /* ------ SUPPLY ------ */
 
 /obj/item/weapon/card/id/sealab/faculty/supply/quartermaster
-	job_access_type = /datum/job/supply/qm
+	job_access_type = /datum/job/supply/head
 
 /obj/item/weapon/card/id/sealab/faculty/supply/cargo_tech
 	job_access_type = /datum/job/supply/cargo_tech
@@ -111,5 +117,3 @@
 
 /obj/item/weapon/card/id/sealab/faculty/intern
 	job_access_type = /datum/job/service/intern
-
-

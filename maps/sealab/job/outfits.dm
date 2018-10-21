@@ -34,7 +34,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	uniform = /obj/item/clothing/under/suit_jacket/navy
 	shoes = /obj/item/clothing/shoes/laceup
 	l_ear = /obj/item/device/radio/headset/heads/administrator
-	id_type = /obj/item/weapon/card/id/sealab/gold
+	id_type = /obj/item/weapon/card/id/sealab/executive/administrator
 	pda_type = /obj/item/modular_computer/pda/captain
 
 /decl/hierarchy/outfit/job/sealab/faculty/executive/administrator/New()
@@ -48,7 +48,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	uniform = /obj/item/clothing/under/rank/head_of_personnel
 	l_ear = /obj/item/device/radio/headset/heads/hop
 	shoes = /obj/item/clothing/shoes/brown
-	id_type = /obj/item/weapon/card/id/sealab/silver
+	id_type = /obj/item/weapon/card/id/sealab/executive/hop
 	pda_type = /obj/item/modular_computer/pda/heads/hop
 
 
@@ -60,7 +60,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	uniform = /obj/item/clothing/under/rank/research_director
 	suit = /obj/item/clothing/suit/storage/toggle/labcoat/science
 	shoes = /obj/item/clothing/shoes/brown
-	id_type = /obj/item/weapon/card/id/sealab/silver/rd
+	id_type = /obj/item/weapon/card/id/sealab/executive/rd
 	pda_type = /obj/item/modular_computer/pda/heads/rd
 
 /decl/hierarchy/outfit/job/sealab/faculty/research
@@ -80,14 +80,14 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	id_type = /obj/item/weapon/card/id/sealab/faculty/research/senior
 
 /decl/hierarchy/outfit/job/sealab/faculty/research/scientist
-	name = OUTFIT_JOB_NAME("Scientist")
+	name = OUTFIT_JOB_NAME("Researcher")
 	uniform = /obj/item/clothing/under/rank/scientist
 	suit = /obj/item/clothing/suit/storage/toggle/labcoat/science
 	pda_type = /obj/item/modular_computer/pda/science
 	id_type = /obj/item/weapon/card/id/sealab/faculty/research/scientist
 
 /decl/hierarchy/outfit/job/sealab/faculty/research/intern
-	name = OUTFIT_JOB_NAME("Science Intern")
+	name = OUTFIT_JOB_NAME("Research Intern")
 	uniform = /obj/item/clothing/under/rank/scientist
 	pda_type = /obj/item/modular_computer/pda/science
 	id_type = /obj/item/weapon/card/id/sealab/faculty/research/intern
@@ -101,7 +101,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	uniform = /obj/item/clothing/under/rank/chief_engineer
 	shoes = /obj/item/clothing/shoes/workboots
 	l_ear = /obj/item/device/radio/headset/heads/ce
-	id_type = /obj/item/weapon/card/id/sealab/silver/engineering
+	id_type = /obj/item/weapon/card/id/sealab/executive/engineering
 	pda_type = /obj/item/modular_computer/pda/heads/ce
 	pda_slot = slot_l_store
 	flags = OUTFIT_HAS_BACKPACK|OUTFIT_EXTENDED_SURVIVAL
@@ -149,7 +149,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	l_ear = /obj/item/device/radio/headset/heads/hos
 	uniform = /obj/item/clothing/under/rank/head_of_security
 	shoes = /obj/item/clothing/shoes/dutyboots
-	id_type = /obj/item/weapon/card/id/sealab/silver/hos
+	id_type = /obj/item/weapon/card/id/sealab/executive/hos
 	pda_type = /obj/item/modular_computer/pda/heads/hos
 
 /decl/hierarchy/outfit/job/sealab/faculty/executive/hos/New()
@@ -173,8 +173,8 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	id_type = /obj/item/weapon/card/id/sealab/faculty/security/guard
 	pda_type = /obj/item/modular_computer/pda/security
 
-/decl/hierarchy/outfit/job/sealab/faculty/security/brig_officer
-	name = OUTFIT_JOB_NAME("Brig Officer")
+/decl/hierarchy/outfit/job/sealab/faculty/security/brig_guard
+	name = OUTFIT_JOB_NAME("Brig Guard")
 	uniform = /obj/item/clothing/under/rank/security
 	id_type = /obj/item/weapon/card/id/sealab/faculty/security/guard
 	pda_type = /obj/item/modular_computer/pda/security
@@ -213,11 +213,11 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	shoes = /obj/item/clothing/shoes/brown
 	l_hand = /obj/item/weapon/storage/firstaid/adv
 	r_pocket = /obj/item/device/flashlight/pen
-	id_type = /obj/item/weapon/card/id/sealab/silver/cmo
+	id_type = /obj/item/weapon/card/id/sealab/executive/cmo
 	pda_type = /obj/item/modular_computer/pda/heads/cmo
 	pda_slot = slot_l_store
 
-/decl/hierarchy/outfit/job/sealab/faculty/command/cmo/New()
+/decl/hierarchy/outfit/job/sealab/faculty/executive/cmo/New()
 	..()
 	BACKPACK_OVERRIDE_MEDICAL
 
@@ -287,6 +287,14 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	uniform = /obj/item/clothing/under/rank/psych
 	shoes = /obj/item/clothing/shoes/white
 
+/decl/hierarchy/outfit/job/sealab/faculty/medical/doctor/field_medic
+	name = OUTFIT_JOB_NAME("Field Medic")
+	suit = /obj/item/clothing/suit/storage/toggle/fr_jacket
+	shoes = /obj/item/clothing/shoes/workboots
+	l_hand = /obj/item/weapon/storage/firstaid/adv
+	belt = /obj/item/weapon/storage/belt/medical/emt
+	flags = OUTFIT_HAS_BACKPACK|OUTFIT_EXTENDED_SURVIVAL
+
 /decl/hierarchy/outfit/job/sealab/faculty/medical/intern
 	name = OUTFIT_JOB_NAME("Medical Resident")
 	id_type = /obj/item/weapon/card/id/sealab/faculty/medical/intern
@@ -300,7 +308,7 @@ Keeping them simple for now, just spawning with basic EC uniforms, and pretty mu
 	name = OUTFIT_JOB_NAME("Paramedic")
 	uniform = /obj/item/clothing/under/rank/medical/scrubs/black
 	suit = /obj/item/clothing/suit/storage/toggle/fr_jacket
-	shoes = /obj/item/clothing/shoes/jackboots
+	shoes = /obj/item/clothing/shoes/workboots
 	l_hand = /obj/item/weapon/storage/firstaid/adv
 	belt = /obj/item/weapon/storage/belt/medical/emt
 	flags = OUTFIT_HAS_BACKPACK|OUTFIT_EXTENDED_SURVIVAL

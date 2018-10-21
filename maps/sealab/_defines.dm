@@ -16,7 +16,7 @@
 #define MEDICAL_ROLES /datum/job/medical/head, /datum/job/medical/senior, /datum/job/medical/doctor, /datum/job/medical/intern
 
 // For members of the supply department
-#define SUPPLY_ROLES /datum/job/supply/qm, /datum/job/supply/cargo_tech
+#define SUPPLY_ROLES /datum/job/supply/head, /datum/job/supply/cargo_tech
 
 // For members of the service department
 #define SERVICE_ROLES /datum/job/service/janitor, /datum/job/service/chef, /datum/job/service/bartender, /datum/job/service/intern

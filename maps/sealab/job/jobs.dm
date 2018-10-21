@@ -46,7 +46,7 @@
 	required_education = EDUCATION_TIER_BACHELOR
 
 /datum/job/executive/administrator/get_description_blurb()
-	return "You are the Administrator. You are the top dog. You are an experienced professional and ultimately responsible for all that happens in the facility. Your job is to make sure [GLOB.using_map.full_name] operates smoothly and completes its research goals. Delegate to the executives under you to effectively manage the facility, and listen to and trust their expertise."
+	return "You are the Administrator. You are the top dog. You are an experienced executive and ultimately responsible for all that happens in the facility. Your job is to make sure [GLOB.using_map.full_name] operates smoothly and completes its research goals. Delegate to the executives under you to effectively manage the facility, and listen to and trust their expertise."
 
 /datum/job/executive/hop
 	title = "Head of Personnel"
@@ -96,7 +96,7 @@
 	required_education = EDUCATION_TIER_BACHELOR
 
 /datum/job/executive/hop/get_description_blurb()
-	return "You are the Head of Personnel. You are the right-hand man of the Administrator. In his absence, you are expected to take his place. Your primary duty is directly managing department heads and all those outside a department heading."
+	return "You are the Head of Personnel. You are the right-hand man of the Administrator. In his absence, you are expected to take his place. Your primary duty is directly managing department heads and all service workers."
 
 
 /* ------ RESEARCH ------ */
@@ -178,7 +178,7 @@
 	required_education = EDUCATION_TIER_DOCTORATE
 
 /datum/job/research/scientist
-	title = "Scientist"
+	title = "Researcher"
 
 	total_positions = 6
 	spawn_positions = 6
@@ -192,7 +192,7 @@
 		"Xenobiologist",
 		"Xenobotanist",
 		"Materials Scientist",
-		"Researcher"
+		"Scientist"
 	)
 	outfit_type = /decl/hierarchy/outfit/job/sealab/faculty/research/scientist
 
@@ -293,7 +293,7 @@
 	required_education = EDUCATION_TIER_MASTERS
 
 /datum/job/engineering/head/get_description_blurb()
-	return "You are the Chief Engineer. You manage the Engineering Department. You are responsible for the Senior engineer, who is your right hand and (should be) an experienced, skilled engineer. Delegate to and listen to them. Manage your engineers, ensure vessel power stays on, breaches are patched and problems are fixed. Advise the CO on engineering matters. You are also responsible for the maintenance and control of any vessel synthetics. You are an experienced engineer with a wealth of theoretical knowledge. You should also know vessel regulations to a reasonable degree."
+	return "You are the Chief Engineer. You are responsible for the Engineering Department. Manage your engineers, ensure the power stays on, and design new additions for the facility. Advise the rest of the crew on engineering matters."
 
 /datum/job/engineering/senior
 	title = "Senior Engineer"
@@ -334,9 +334,6 @@
 							 /datum/computer_file/program/camera_monitor,
 							 /datum/computer_file/program/shields_monitor)
 	required_education = EDUCATION_TIER_TRADE
-
-/datum/job/engineering/senior/get_description_blurb()
-	return "You are the Senior Engineer. You are a veteran SNCO. You are subordinate to the Chief Engineer though you may have many years more experience than them and your subordinates are the rest of engineering. You should be an expert in practically every engineering area and familiar and possess leadership skills. Coordinate the team and ensure the smooth running of the department along with the Chief Engineer."
 
 /datum/job/engineering/engineer
 	title = "Engineer"
@@ -384,9 +381,6 @@
 							 /datum/computer_file/program/shields_monitor)
 	required_education = EDUCATION_TIER_TRADE
 
-/datum/job/engineering/engineer/get_description_blurb()
-	return "You are an Engineer. You operate under one of many titles and may be highly specialised in a specific area of engineering. You probably have at least a general familiarity with most other areas though this is not expected. You are subordinate to the Senior Engineer and the Chief Engineer and are expected to follow them."
-
 /datum/job/engineering/intern
 	title = "Engineering Intern"
 
@@ -432,9 +426,6 @@
 							 /datum/computer_file/program/shields_monitor)
 	required_education = EDUCATION_TIER_BASIC
 
-/datum/job/engineering/intern/get_description_blurb()
-	return "You are an Engineering Intern. You are learning how to operate the various onboard engineering systems from senior engineering staff. You are subordinate to all of the other engineers aboard."
-
 
 /* ------ SECURITY ------ */
 
@@ -479,7 +470,7 @@
 	required_education = EDUCATION_TIER_BACHELOR
 
 /datum/job/security/head/get_description_blurb()
-	return "You are the Chief of Security. You manage ship security. The Masters at Arms and the Military Police, as well as the Brig Officer and the Forensic Technician. You keep the vessel safe. You handle both internal and external security matters. You are the law. You are subordinate to the CO and the XO. You are expected to know the SCMJ and Sol law and Alert Procedure to a very high degree along with general regulations."
+	return "You are the Head of Security. You are responsible for the Security Department. Manage your security guards to keep the facility safe from alien wildlife and would-be saboteurs. Be fully aware of corporate regulations and dispense justice where it is needed. You are subordinate to the administrator and the head of personnel."
 
 /datum/job/security/guard
 	title = "Security Guard"
@@ -492,6 +483,9 @@
 	economic_power = 6
 	minimal_player_age = 0
 	ideal_character_age = 25
+	alt_titles = list(
+		"Brig Guard" = /decl/hierarchy/outfit/job/sealab/faculty/security/brig_guard
+	)
 	outfit_type = /decl/hierarchy/outfit/job/sealab/faculty/security/guard
 
 	min_skill = list(   SKILL_COMBAT  = SKILL_BASIC,
@@ -518,8 +512,8 @@
 	ideal_character_age = 35
 	skill_points = 14
 	alt_titles = list(
-		"Forensics Technician",
-		"Criminal Investigator"
+		"Forensics Technician" = /decl/hierarchy/outfit/job/sealab/faculty/security/detective/forensic_tech,
+		"Criminal Investigator" = /decl/hierarchy/outfit/job/sealab/faculty/security/detective/forensic_tech
 	)
 	outfit_type = /decl/hierarchy/outfit/job/sealab/faculty/security/detective
 
@@ -614,7 +608,7 @@
 	required_education = EDUCATION_TIER_MEDSCHOOL
 
 /datum/job/medical/head/get_description_blurb()
-	return "You are the Chief Medical Officer. You manage the medical department. You ensure all members of medical are skilled, tasked and handling their duties. Ensure your doctors are staffing your infirmary and your corpsman/paramedics are ready for response. Act as a second surgeon or backup chemist in the absence of either. You are expected to know medical very well, along with general regulations."
+	return "You are the Chief Medical Officer. You are responsible for the Medical Department. You ensure all members of medical are skilled, tasked, and handling their duties. Ensure your doctors are staffing your infirmary and your paramedics are ready for response. You are expected to know medical very well and remember, \"Do no harm\"."
 
 /datum/job/medical/senior
 	title = "Senior Doctor"
@@ -629,8 +623,10 @@
 	economic_power = 8
 	alt_titles = list(
 		"Physician",
-		"Surgeon",
-		"Trauma Surgeon"
+		"Chemist" = /decl/hierarchy/outfit/job/sealab/faculty/medical/doctor/chemist,
+		"Virologist" = /decl/hierarchy/outfit/job/sealab/faculty/medical/senior/virologist,
+		"Surgeon" = /decl/hierarchy/outfit/job/sealab/faculty/medical/doctor/surgeon,
+		"Trauma Surgeon" = /decl/hierarchy/outfit/job/sealab/faculty/medical/doctor/surgeon
 	)
 	outfit_type = /decl/hierarchy/outfit/job/sealab/faculty/medical/senior
 
@@ -665,8 +661,10 @@
 	ideal_character_age = 40
 	minimal_player_age = 0
 	alt_titles = list(
-		"Field Medic",
-		"Medical Technician"
+		"Field Medic" = /decl/hierarchy/outfit/job/sealab/faculty/medical/doctor/field_medic,
+		"Medical Technician",
+		"Pharmacist" = /decl/hierarchy/outfit/job/sealab/faculty/medical/doctor/chemist,
+		"Mortician" = /decl/hierarchy/outfit/job/sealab/faculty/medical/doctor/mortus
 	)
 	outfit_type = /decl/hierarchy/outfit/job/sealab/faculty/medical/doctor
 
@@ -699,8 +697,9 @@
 	ideal_character_age = 20
 	alt_titles = list(
 		"Nurse",
-		"Orderly",
-		"Medical Intern"
+		"Medical Intern",
+		"Orderly" = /decl/hierarchy/outfit/job/sealab/faculty/medical/intern/orderly,
+		"Paramedic" = /decl/hierarchy/outfit/job/sealab/faculty/medical/intern/paramedic
 	)
 
 	outfit_type = /decl/hierarchy/outfit/job/sealab/faculty/medical/intern
@@ -732,7 +731,7 @@
 	department = "Supply"
 	department_flag = SUP
 
-/datum/job/supply/qm
+/datum/job/supply/head
 	title = "Quartermaster"
 
 	total_positions = 1
@@ -761,6 +760,9 @@
 							 /datum/computer_file/program/deck_management,
 							 /datum/computer_file/program/reports)
 	required_education = EDUCATION_TIER_BASIC
+
+/datum/job/supply/head/get_description_blurb()
+	return "You are the Quartermaster. While not actually an executive member of the faculty, you are responsible for the Supply Department. Manage your cargo technicians to ensure timely deliveries of resources to every department. Any resource shortages are your responsibility."
 
 /datum/job/supply/cargo_tech
 	title = "Cargo Technician"
