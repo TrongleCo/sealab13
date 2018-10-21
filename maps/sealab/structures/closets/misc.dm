@@ -71,7 +71,7 @@
 
 /obj/structure/closet/secure_closet/crew/research
 	name = "research equipment locker"
-	req_access = list(access_nanotrasen)
+	req_access = list(access_corporate)
 	icon_state = "nanot1"
 	icon_closed = "nanot"
 	icon_locked = "nanot1"

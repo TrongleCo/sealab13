@@ -6,7 +6,7 @@
 	cost = 120
 	containername = "\improper Excavation voidsuit crate"
 	containertype = /obj/structure/closet/crate/secure/large
-	access = access_nanotrasen
+	access = access_corporate
 
 /decl/hierarchy/supply_pack/science/voidsuit_mining
 	name = "EVA - Mining voidsuit"
@@ -16,7 +16,7 @@
 	cost = 120
 	containername = "\improper Mining voidsuit crate"
 	containertype = /obj/structure/closet/crate/secure/large
-	access = access_nanotrasen
+	access = access_corporate
 
 /decl/hierarchy/supply_pack/science/voidsuit_pilot
 	name = "EVA - Pilot voidsuit"
@@ -26,7 +26,7 @@
 	cost = 120
 	containername = "\improper Pilot voidsuit crate"
 	containertype = /obj/structure/closet/crate/secure/large
-	access = access_nanotrasen
+	access = access_corporate
 
 /decl/hierarchy/supply_pack/science/voidsuit_exploration
 	name = "EVA - Exploration voidsuit"
@@ -46,7 +46,7 @@
 	cost = 120
 	containername = "\improper Excavation voidsuit crate"
 	containertype = /obj/structure/closet/crate/secure/large
-	access = access_nanotrasen
+	access = access_corporate
 
 /decl/hierarchy/supply_pack/operations/voidsuit_mining
 	name = "EVA - Mining voidsuit"
@@ -56,7 +56,7 @@
 	cost = 120
 	containername = "\improper Mining voidsuit crate"
 	containertype = /obj/structure/closet/crate/secure/large
-	access = access_nanotrasen
+	access = access_corporate
 
 /decl/hierarchy/supply_pack/operations/voidsuit_pilot
 	name = "EVA - Pilot voidsuit"
@@ -66,7 +66,7 @@
 	cost = 120
 	containername = "\improper Pilot voidsuit crate"
 	containertype = /obj/structure/closet/crate/secure/large
-	access = access_nanotrasen
+	access = access_corporate
 
 /decl/hierarchy/supply_pack/operations/voidsuit_exploration
 	name = "EVA - Exploration voidsuit"

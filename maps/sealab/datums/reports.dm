@@ -8,7 +8,7 @@
 
 /datum/computer_file/report/recipient/crew_transfer/generate_fields()
 	..()
-	var/list/xo_fields = list()
+	var/list/adm_fields = list()
 	add_field(/datum/report_field/instruction, "Office of the Head of Personnel")
 	add_field(/datum/report_field/people/from_manifest, "Name (HOP)")
 	add_field(/datum/report_field/people/from_manifest, "Name (applicant)", required = 1)
@@ -19,11 +19,11 @@
 	add_field(/datum/report_field/pencode_text, "Reason stated")
 	add_field(/datum/report_field/instruction, "The following fields render the document invalid if not signed clearly.")
 	add_field(/datum/report_field/signature, "Applicant signature")
-	xo_fields += add_field(/datum/report_field/signature, "Executive Officer's signature")
-	xo_fields += add_field(/datum/report_field/number, "Number of personnel in present/previous position")
-	xo_fields += add_field(/datum/report_field/number, "Number of personnel in requested position")
-	xo_fields += add_field(/datum/report_field/options/yes_no, "Approved")
-	for(var/datum/report_field/field in xo_fields)
+	adm_fields += add_field(/datum/report_field/signature, "Administrator's signature")
+	adm_fields += add_field(/datum/report_field/number, "Number of personnel in present/previous position")
+	adm_fields += add_field(/datum/report_field/number, "Number of personnel in requested position")
+	adm_fields += add_field(/datum/report_field/options/yes_no, "Approved")
+	for(var/datum/report_field/field in adm_fields)
 		field.set_access(access_edit = access_hop)
 
 /datum/computer_file/report/recipient/access_modification
@@ -34,7 +34,7 @@
 
 /datum/computer_file/report/recipient/access_modification/generate_fields()
 	..()
-	var/list/xo_fields = list()
+	var/list/adm_fields = list()
 	add_field(/datum/report_field/instruction, "Office of the Head of Personnel")
 	add_field(/datum/report_field/people/from_manifest, "Name (HOP)")
 	add_field(/datum/report_field/people/from_manifest, "Name (applicant)", required = 1)
@@ -46,10 +46,10 @@
 	add_field(/datum/report_field/simple_text, "Duration of expanded access")
 	add_field(/datum/report_field/instruction, "The following fields render the document invalid if not signed clearly.")
 	add_field(/datum/report_field/signature, "Applicant signature")
-	xo_fields += add_field(/datum/report_field/signature, "Executive Officer's signature")
-	xo_fields += add_field(/datum/report_field/number, "Number of personnel in relevant position")
-	xo_fields += add_field(/datum/report_field/options/yes_no, "Approved")
-	for(var/datum/report_field/field in xo_fields)
+	adm_fields += add_field(/datum/report_field/signature, "Administrator's signature")
+	adm_fields += add_field(/datum/report_field/number, "Number of personnel in relevant position")
+	adm_fields += add_field(/datum/report_field/options/yes_no, "Approved")
+	for(var/datum/report_field/field in adm_fields)
 		field.set_access(access_edit = access_hop)
 
 /datum/computer_file/report/recipient/borging
@@ -60,7 +60,7 @@
 
 /datum/computer_file/report/recipient/borging/generate_fields()
 	..()
-	var/list/xo_fields = list()
+	var/list/adm_fields = list()
 	add_field(/datum/report_field/instruction, "Office of the Head of Personnel")
 	add_field(/datum/report_field/people/from_manifest, "Name (HOP)")
 	add_field(/datum/report_field/people/from_manifest, "Name (subject)", required = 1)
@@ -68,9 +68,9 @@
 	add_field(/datum/report_field/time, "Time filed")
 	add_field(/datum/report_field/instruction, "I, undersigned, hereby agree to willingly undergo a Regulation Lobotimization with intention of cyborgification or AI assimilation, and I am aware of all the consequences of such act. I also understand that this operation may be irreversible, and that my employment contract will be terminated.")
 	add_field(/datum/report_field/signature, "Subject's signature")
-	xo_fields += add_field(/datum/report_field/signature, "Executive Officer's signature")
-	xo_fields += add_field(/datum/report_field/options/yes_no, "Approved")
-	for(var/datum/report_field/field in xo_fields)
+	adm_fields += add_field(/datum/report_field/signature, "Administrator's signature")
+	adm_fields += add_field(/datum/report_field/options/yes_no, "Approved")
+	for(var/datum/report_field/field in adm_fields)
 		field.set_access(access_edit = access_hop)
 
 /datum/computer_file/report/recipient/sec
@@ -107,17 +107,17 @@
 /datum/computer_file/report/recipient/sec/incident/generate_fields()
 	..()
 	add_field(/datum/report_field/instruction, "Security Department")
-	add_field(/datum/report_field/instruction, "To be filled out by Officer on duty responding to the Incident. Report must be signed and submitted before the end of the shift!")
-	add_field(/datum/report_field/people/from_manifest, "Reporting Officer")
+	add_field(/datum/report_field/instruction, "To be filled out by guard on duty responding to the Incident. Report must be signed and submitted before the end of the shift!")
+	add_field(/datum/report_field/people/from_manifest, "Reporting Guard")
 	add_field(/datum/report_field/simple_text, "Offense/Incident Type")
 	add_field(/datum/report_field/date, "Date")
 	add_field(/datum/report_field/time, "Time of incident")
-	add_field(/datum/report_field/people/list_from_manifest, "Assisting Officer(s)")
+	add_field(/datum/report_field/people/list_from_manifest, "Assisting Guard(s)")
 	add_field(/datum/report_field/simple_text, "Location")
 	add_field(/datum/report_field/pencode_text, "Personnel involved in Incident", "\[small\]\[i\](V-Victim, S-Suspect, W-Witness, M-Missing, A-Arrested, RP-Reporting Person, D-Deceased)\[/i\]\[/small\]")
 	add_field(/datum/report_field/pencode_text, "Description of Items/Property", "\[small\]\[i\](D-Damaged, E-Evidence, L-Lost, R-Recovered, S-Stolen)\[/i\]\[/small\]")
 	add_field(/datum/report_field/pencode_text, "Narrative")
-	add_field(/datum/report_field/signature, "Reporting Officer's signature")
+	add_field(/datum/report_field/signature, "Reporting Guard's signature")
 	set_access(access_edit = access_security)
 
 /datum/computer_file/report/recipient/sec/evidence
@@ -134,7 +134,7 @@
 	add_field(/datum/report_field/people/from_manifest, "Confiscated from")
 	add_field(/datum/report_field/pencode_text, "List of items in custody/evidence lockup")
 	set_access(access_edit = access_security)
-	temp_field = add_field(/datum/report_field/signature, "Brig Officer's signature")
+	temp_field = add_field(/datum/report_field/signature, "Brig Guard's signature")
 	temp_field.set_access(access_edit = list(access_security, access_armory))
 	temp_field = add_field(/datum/report_field/signature, "Forensic Technician's signature")
 	temp_field.set_access(access_edit = list(access_security, access_forensics_lockers))
@@ -199,9 +199,10 @@
 	add_field(/datum/report_field/pencode_text, "Defense/Offense")
 	add_field(/datum/report_field/pencode_text, "Special Characteristic(s)")
 	add_field(/datum/report_field/pencode_text, "Classification")
-	add_field(/datum/report_field/instruction, "On completion of this form and form approval, the Research Director should fax the form to both the Corporate Liaison and the Commanding Officer, as well as keep a copy on file in their Office alongside other mission reports.")
+	add_field(/datum/report_field/instruction, "On completion of this form and form approval, the Research Director should fax the form to the Administrator, as well as storing a copy of the file in their office alongside other mission reports.")
 
-//NT reports, mostly for liason but can be used by any NT personnel.
+
+// MMU reports
 
 /datum/computer_file/report/recipient/mmu
 	logo = "\[logo\]"
@@ -229,18 +230,18 @@
 	add_field(/datum/report_field/people/from_manifest, "Overviewing Research Director")
 	add_field(/datum/report_field/pencode_text, "Containment Procedures")
 	add_field(/datum/report_field/pencode_text, "Generalized Overview")
-	add_field(/datum/report_field/simple_text, "Approximate Age of AO")
-	add_field(/datum/report_field/simple_text, "Threat Level of AO")
+	add_field(/datum/report_field/simple_text, "Approximate Age of Anomaly")
+	add_field(/datum/report_field/simple_text, "Threat Level of Anomaly")
 
 /datum/computer_file/report/recipient/mmu/fire
 	form_name = "C-0102"
-	title = "Corporate Employment Termination Form"
+	title = "Employment Termination Form"
 	available_on_ntnet = 1
 
 /datum/computer_file/report/recipient/mmu/fire/New()
 	..()
 	set_access(access_heads, access_heads)
-	set_access(access_nanotrasen, override = 0)
+	set_access(access_corporate, override = 0)
 
 /datum/computer_file/report/recipient/mmu/fire/generate_fields()
 	..()
@@ -255,7 +256,7 @@
 
 /datum/computer_file/report/recipient/mmu/incident/New()
 	..()
-	set_access(access_edit = access_nanotrasen)
+	set_access(access_edit = access_corporate)
 
 /datum/computer_file/report/recipient/mmu/incident/generate_fields()
 	..()
@@ -362,7 +363,7 @@
 	temp_fields += add_field(/datum/report_field/signature, "Corporate Representative's Signature")
 	temp_fields += add_field(/datum/report_field/options/yes_no, "Approved")
 	for(var/datum/report_field/temp_field in temp_fields)
-		temp_field.set_access(access_edit = access_nanotrasen)
+		temp_field.set_access(access_edit = access_corporate)
 
 /datum/computer_file/report/recipient/mmu/deny
 	form_name = "C-1443D"
@@ -381,7 +382,7 @@
 	add_field(/datum/report_field/options/yes_no, "Project Cancellation")
 	add_field(/datum/report_field/simple_text, "Other")
 	add_field(/datum/report_field/options/yes_no, "Report Approved")
-	set_access(access_edit = access_nanotrasen)
+	set_access(access_edit = access_corporate)
 
 /datum/computer_file/report/recipient/mmu/memo/generate_fields()
 	..()
@@ -398,7 +399,7 @@
 
 /datum/computer_file/report/recipient/mmu/memo/internal/New()
 	..()
-	set_access(access_nanotrasen, access_nanotrasen)
+	set_access(access_corporate, access_corporate)
 
 /datum/computer_file/report/recipient/mmu/memo/external
 	form_name = "C-0005"
@@ -407,7 +408,7 @@
 
 /datum/computer_file/report/recipient/mmu/memo/external/New()
 	..()
-	set_access(access_edit = access_nanotrasen)
+	set_access(access_edit = access_corporate)
 
 //No access restrictions for easier use.
 /datum/computer_file/report/recipient/mmu/sales
@@ -443,9 +444,9 @@
 	add_field(/datum/report_field/pencode_text, "Reason for Request")
 	add_field(/datum/report_field/signature, "Applicant's Signature")
 	temp_field = add_field(/datum/report_field/signature, "Request Issuer's Signature")
-	temp_field.set_access(access_edit = access_nanotrasen)
+	temp_field.set_access(access_edit = access_corporate)
 	temp_field = add_field(/datum/report_field/options/yes_no, "Request Approved by Issuer")
-	temp_field.set_access(access_edit = access_nanotrasen)
+	temp_field.set_access(access_edit = access_corporate)
 	temp_field = add_field(/datum/report_field/signature, "Issuing Authority's Signature (acknowledging reciept)")
 	temp_field.set_access(access_edit = access_representative)
 
@@ -463,7 +464,7 @@
 	add_field(/datum/report_field/instruction, "To be shipped and delivered directly to the employee's next of kin without delay.")
 	add_field(/datum/report_field/signature, "Signature")
 	add_field(/datum/report_field/options/yes_no, "Approved")
-	set_access(access_edit = access_nanotrasen)
+	set_access(access_edit = access_corporate)
 
 //Solgov reports, mostly for the SGR
 /datum/computer_file/report/recipient/sol
