@@ -109,5 +109,6 @@
 
 // Used by fluid system.
 #define COLOR_OCEAN "#6be5ff"
+#define COLOR_SAND	"#a38f4e"
 
 #define RANDOM_RGB rgb(rand(0,255), rand(0,255), rand(0,255))

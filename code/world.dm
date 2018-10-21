@@ -5,7 +5,7 @@
 
 /world
 	mob = /mob/new_player
-	turf = /turf/simulated/ocean
+	turf = /turf/simulated/ocean/sand
 	area = /area/exterior/ocean
 	view = "15x15"
 	cache_lifespan = 7
