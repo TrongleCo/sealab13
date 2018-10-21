@@ -15,7 +15,7 @@
 	overmap_event_areas = 34
 	usable_email_tlds = list("omail.net", "mmu.net")
 
-	allowed_spawns = list("Dormitory", "Cyborg Storage")
+	allowed_spawns = list("Dormitory")
 	default_spawn = "Dormitory"
 
 	station_name  = "Sealab"
