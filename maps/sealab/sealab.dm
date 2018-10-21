@@ -22,6 +22,7 @@
 	#include "items/uniform_vendor.dm"
 
 	#include "items/clothing/under.dm"
+	#include "items/clothing/mask.dm"
 
 	#include "job/access.dm"
 	#include "job/jobs.dm"
