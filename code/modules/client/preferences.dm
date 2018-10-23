@@ -258,8 +258,8 @@ datum/preferences
 	character.update_hair(0)
 	character.update_icons()
 
-	character.char_branch = mil_branches.get_branch(char_branch)
-	character.char_rank = mil_branches.get_rank(char_branch, char_rank)
+	character.char_branch = factions.get_branch(char_branch)
+	character.char_rank = factions.get_rank(char_branch, char_rank)
 
 	if(is_preview_copy)
 		return

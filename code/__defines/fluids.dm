@@ -4,7 +4,9 @@
 #define FLUID_OVER_MOB_HEAD 300
 #define FLUID_DEEP 800                     // Depth deep icon is used
 #define FLUID_MAX_DEPTH FLUID_DEEP*4       // Arbitrary max value for flooding.
-#define FLUID_PUSH_THRESHOLD 20            // Amount of water flow needed to push items.
+
+#define FLUID_FLOW_FLOOD 500 // flow rate for sound effects to be played
+#define FLUID_FLOW_PUSH 60 // Amount of water flow needed to push items.
 
 // Expects /turf for T.
 #define ADD_ACTIVE_FLUID_SOURCE(T)    SSfluids.water_sources[T] = TRUE
@@ -44,7 +46,7 @@
 		UPDATE_FLUID_BLOCKED_DIRS(next); \
 		if((next.fluid_blocked_dirs & GLOB.reverse_dir[spread_dir]) || !next.CanFluidPass(spread_dir)) continue; \
 		flooded_a_neighbor = TRUE; \
-		var/obj/effect/fluid/F = locate() in next; \
+		var/obj/effect/fluid/F = next.fluid; \
 		if(!F && !dry_run) {\
 			F = new /obj/effect/fluid(next); \
 			var/datum/gas_mixture/GM = T:return_air(); \

@@ -600,8 +600,12 @@
 		)
 
 /obj/item/weapon/light/bulb/red
-	color = "#da0205"
-	b_colour = "#da0205"
+	color = "#ff0003"
+	b_colour = "#ff0003"
+	b_max_bright = 0.9
+	b_inner_range = 1
+	b_outer_range = 5
+	b_curve = 2
 
 /obj/item/weapon/light/bulb/red/readylight
 	lighting_modes = list(

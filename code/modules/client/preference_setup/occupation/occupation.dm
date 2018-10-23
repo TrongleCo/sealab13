@@ -82,8 +82,8 @@
 		return
 
 	var/datum/species/S = preference_species()
-	var/datum/mil_branch/player_branch = null
-	var/datum/mil_rank/player_rank = null
+	var/datum/faction/player_branch = null
+	var/datum/job_rank/player_rank = null
 
 	. = list()
 	. += "<style>.Points,a.Points{background: #cc5555;}</style>"
@@ -92,11 +92,11 @@
 	. += "<b>Choose occupation chances. <font size=3>Click on the occupation to select skills.</font><br>Unavailable occupations are crossed out.</b>"
 	if(GLOB.using_map.flags & MAP_HAS_BRANCH)
 
-		player_branch = mil_branches.get_branch(pref.char_branch)
+		player_branch = factions.get_branch(pref.char_branch)
 
 		. += "Branch of Service: <a href='?src=\ref[src];char_branch=1'>[pref.char_branch]</a>	"
 	if(GLOB.using_map.flags & MAP_HAS_RANK)
-		player_rank = mil_branches.get_rank(pref.char_branch, pref.char_rank)
+		player_rank = factions.get_rank(pref.char_branch, pref.char_rank)
 
 		. += "Rank: <a href='?src=\ref[src];char_rank=1'>[pref.char_rank]</a>	"
 	. += "<br>"
@@ -231,8 +231,8 @@
 		if(SetJob(user, href_list["set_job"], text2num(href_list["set_level"]))) return (pref.equip_preview_mob ? TOPIC_REFRESH_UPDATE_PREVIEW : TOPIC_REFRESH)
 
 	else if(href_list["char_branch"])
-		var/choice = input(user, "Choose your branch of service.", CHARACTER_PREFERENCE_INPUT_TITLE, pref.char_branch) as null|anything in mil_branches.spawn_branches(preference_species())
-		if(choice && CanUseTopic(user) && mil_branches.is_spawn_branch(choice, preference_species()))
+		var/choice = input(user, "Choose your branch of service.", CHARACTER_PREFERENCE_INPUT_TITLE, pref.char_branch) as null|anything in factions.spawn_branches(preference_species())
+		if(choice && CanUseTopic(user) && factions.is_spawn_branch(choice, preference_species()))
 			pref.char_branch = choice
 			pref.char_rank = "None"
 			prune_job_prefs()
@@ -241,12 +241,12 @@
 
 	else if(href_list["char_rank"])
 		var/choice = null
-		var/datum/mil_branch/current_branch = mil_branches.get_branch(pref.char_branch)
+		var/datum/faction/current_branch = factions.get_branch(pref.char_branch)
 
 		if(current_branch)
-			choice = input(user, "Choose your rank.", CHARACTER_PREFERENCE_INPUT_TITLE, pref.char_rank) as null|anything in mil_branches.spawn_ranks(pref.char_branch, preference_species())
+			choice = input(user, "Choose your rank.", CHARACTER_PREFERENCE_INPUT_TITLE, pref.char_rank) as null|anything in factions.spawn_ranks(pref.char_branch, preference_species())
 
-		if(choice && CanUseTopic(user) && mil_branches.is_spawn_rank(pref.char_branch, choice, preference_species()))
+		if(choice && CanUseTopic(user) && factions.is_spawn_rank(pref.char_branch, choice, preference_species()))
 			pref.char_rank = choice
 			prune_job_prefs()
 			return TOPIC_REFRESH
@@ -310,7 +310,7 @@
 		if(job.allowed_branches)
 			dat += "You can be of following ranks:"
 			for(var/T in job.allowed_branches)
-				var/datum/mil_branch/B = mil_branches.get_branch_by_type(T)
+				var/datum/faction/B = factions.get_branch_by_type(T)
 				dat += "<li>[B.name]: [job.get_ranks(B.name)]"
 		dat += "<hr style='clear:left;'>"
 		if(config.wikiurl)
@@ -433,11 +433,11 @@
 datum/category_item/player_setup_item/proc/prune_occupation_prefs()
 	var/datum/species/S = preference_species()
 	if((GLOB.using_map.flags & MAP_HAS_BRANCH)\
-	   && (!pref.char_branch || !mil_branches.is_spawn_branch(pref.char_branch, S)))
+	   && (!pref.char_branch || !factions.is_spawn_branch(pref.char_branch, S)))
 		pref.char_branch = "None"
 
 	if((GLOB.using_map.flags & MAP_HAS_RANK)\
-	   && (!pref.char_rank || !mil_branches.is_spawn_rank(pref.char_branch, pref.char_rank, S)))
+	   && (!pref.char_rank || !factions.is_spawn_rank(pref.char_branch, pref.char_rank, S)))
 		pref.char_rank = "None"
 
 	prune_job_prefs()

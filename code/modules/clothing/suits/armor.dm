@@ -11,7 +11,7 @@
 	siemens_coefficient = 0.6
 
 
-/obj/item/clothing/suit/armor/vest/old //just realized these had never been removed
+/obj/item/clothing/suit/armor/vest //just realized these had never been removed
 	name = "armor"
 	desc = "An armored vest that protects against some damage."
 	icon_state = "armor"
@@ -22,7 +22,7 @@
 	heat_protection = UPPER_TORSO|LOWER_TORSO
 	armor = list(melee = 50, bullet = 15, laser = 50, energy = 10, bomb = 25, bio = 0, rad = 0)
 
-/obj/item/clothing/suit/armor/vest/old/security
+/obj/item/clothing/suit/armor/vest/security
 	name = "security armor"
 	desc = "An armored vest that protects against some damage. This one has a corporate badge."
 	icon_state = "armorsec"

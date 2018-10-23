@@ -49,9 +49,9 @@
 	desc = "SolGov Crew"
 	region = ACCESS_REGION_GENERAL
 
-/var/const/access_nanotrasen = 81
+/var/const/access_corporate = 81
 /datum/access/nanotrasen
-	id = access_nanotrasen
+	id = access_corporate
 	desc = "Corporate Personnel"
 	region = ACCESS_REGION_RESEARCH
 

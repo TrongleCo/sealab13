@@ -386,7 +386,7 @@ var/global/datum/controller/occupations/job_master
 			if(player.client.prefs.alternate_option == BE_ASSISTANT)
 				Debug("AC2 Assistant located, Player: [player]")
 				if(GLOB.using_map.flags & MAP_HAS_BRANCH)
-					var/datum/mil_branch/branch = mil_branches.get_branch(player.get_branch_pref())
+					var/datum/faction/branch = factions.get_branch(player.get_branch_pref())
 					AssignRole(player, branch.assistant_job)
 				else
 					AssignRole(player, "Assistant")

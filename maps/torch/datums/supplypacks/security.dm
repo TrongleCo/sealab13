@@ -44,7 +44,7 @@
 	cost = 20
 	containertype = /obj/structure/closet/crate/secure
 	containername = "\improper Corporate armor crate"
-	access = access_nanotrasen
+	access = access_corporate
 
 /decl/hierarchy/supply_pack/security/lightnanoarmor
 	name = "Armor - Corporate light"
@@ -53,7 +53,7 @@
 	cost = 15
 	containertype = /obj/structure/closet/crate/secure
 	containername = "\improper Corporate light armor crate"
-	access = access_nanotrasen
+	access = access_corporate
 
 /decl/hierarchy/supply_pack/security/pistol
 	name = "Weapons - Ballistic sidearms"

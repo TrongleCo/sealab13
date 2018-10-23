@@ -63,7 +63,7 @@
 			debug_variables(appearance_manager)
 			feedback_add_details("admin_verb", "DAltAppearanceManager")
 		if("Military Branches")
-			debug_variables(mil_branches)
+			debug_variables(factions)
 			feedback_add_details("admin_verb", "DMilBranches")
 	message_admins("Admin [key_name_admin(usr)] is debugging the [controller] controller.")
 	return

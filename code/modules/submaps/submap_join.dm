@@ -61,9 +61,9 @@
 		var/mob/living/carbon/human/user_human
 		if(ishuman(character))
 			user_human = character
-			if(job.branch && mil_branches)
-				user_human.char_branch = mil_branches.get_branch(job.branch)
-				user_human.char_rank =   mil_branches.get_rank(job.branch, job.rank)
+			if(job.branch && factions)
+				user_human.char_branch = factions.get_branch(job.branch)
+				user_human.char_rank =   factions.get_rank(job.branch, job.rank)
 
 			character.skillset.obtain_from_client(job, character.client)
 			job.equip(character, "")

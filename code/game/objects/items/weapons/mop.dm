@@ -11,7 +11,7 @@
 	attack_verb = list("mopped", "bashed", "bludgeoned", "whacked")
 	var/mopping = 0
 	var/mopcount = 0
-	var/mopspeed = 40
+	var/mopspeed = 25
 	var/list/moppable_types = list(
 		/obj/effect/decal/cleanable,
 		/obj/effect/overlay,
@@ -31,12 +31,12 @@
 	if(istype(A, /turf))
 		var/turf/T = A
 		var/obj/effect/fluid/F = locate() in T
-		if(F && F.fluid_amount > 0)
+		if(F)
 			if(F.fluid_amount > FLUID_SHALLOW)
 				to_chat(user, SPAN_WARNING("There is too much water here to be mopped up."))
 			else
 				user.visible_message("<span class='notice'>\The [user] begins to mop up \the [T].</span>")
-				if(do_after(user, 40, T) && F && !QDELETED(F))
+				if(do_after(user, mopspeed, T) && F && !QDELETED(F))
 					if(F.fluid_amount > FLUID_SHALLOW)
 						to_chat(user, SPAN_WARNING("There is too much water here to be mopped up."))
 					else
@@ -76,7 +76,7 @@
 	item_state = "mop"
 	force = 6
 	throwforce = 11
-	mopspeed = 20
+	mopspeed = 10
 	var/refill_enabled = TRUE //Self-refill toggle for when a janitor decides to mop with something other than water.
 	var/refill_rate = 1 //Rate per process() tick mop refills itself
 	var/refill_reagent = /datum/reagent/water //Determins what reagent to use for refilling, just in case someone wanted to make a HOLY MOP OF PURGING

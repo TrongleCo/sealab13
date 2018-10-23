@@ -31,6 +31,7 @@
 	var/old_dynamic_lighting = dynamic_lighting
 	var/old_affecting_lights = affecting_lights
 	var/old_lighting_overlay = lighting_overlay
+	var/old_fluid = fluid
 	var/old_corners = corners
 
 //	log_debug("Replacing [src.type] with [N]")
@@ -50,6 +51,7 @@
 	var/turf/simulated/W = new N( locate(src.x, src.y, src.z) )
 
 	W.opaque_counter = opaque_counter
+	fluid = old_fluid
 
 	if(ispath(N, /turf/simulated))
 		if(old_fire)

@@ -22,7 +22,7 @@
 	owner = _owner
 	..()
 
-/datum/job/submap/equip(var/mob/living/carbon/human/H, var/alt_title, var/datum/mil_branch/branch, var/datum/mil_rank/grade)
+/datum/job/submap/equip(var/mob/living/carbon/human/H, var/alt_title, var/datum/faction/branch, var/datum/job_rank/grade)
 	. = ..()
 	if(H && owner.skill_setter)
 		owner.skill_setter.initialize_skills(H.skillset)

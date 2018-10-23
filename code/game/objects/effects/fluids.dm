@@ -1,3 +1,6 @@
+// since fluids are so prevelant, they get their own var to speed things up
+/turf/var/obj/effect/fluid = null
+
 /obj/effect/fluid
 	name = ""
 	icon = 'icons/effects/liquids.dmi'
@@ -32,11 +35,14 @@
 	var/turf/simulated/T = start_loc
 	if(istype(T))
 		T.unwet_floor(FALSE)
+
+	start_loc.fluid = src
 	forceMove(start_loc)
 	update_icon()
 
 /obj/effect/fluid/Destroy()
 	if(start_loc)
+		start_loc.fluid = null
 		var/turf/simulated/T = start_loc
 		if(istype(T))
 			T.wet_floor()
@@ -83,7 +89,7 @@
 /obj/effect/fluid_mapped/Initialize()
 	var/turf/T = get_turf(src)
 	if(istype(T))
-		var/obj/effect/fluid/F = locate() in T
+		var/obj/effect/fluid/F = T.fluid
 		if(!F) F = new(T)
 		SET_FLUID_DEPTH(F, fluid_amount)
 	return INITIALIZE_HINT_QDEL
@@ -92,7 +98,8 @@
 /obj/effect/flood
 	name = ""
 	mouse_opacity = 0
-	layer = FLY_LAYER
+	layer = DEEP_FLUID_LAYER
+	plane = EFFECTS_BELOW_LIGHTING_PLANE
 	color = COLOR_OCEAN
 	icon = 'icons/effects/liquids.dmi'
 	icon_state = "ocean"
