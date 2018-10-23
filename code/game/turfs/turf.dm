@@ -41,6 +41,8 @@
 			src.Entered(AM)
 			return
 
+	update_flood_overlay()
+
 	if(dynamic_lighting)
 		luminosity = 0
 	else
