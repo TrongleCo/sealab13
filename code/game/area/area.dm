@@ -201,11 +201,11 @@
 /area/update_icon()
 	if ((fire || eject || party) && (!requires_power||power_environ))//If it doesn't require power, can still activate this proc.
 		if(fire && !eject && !party)
-			icon_state = "blue"
+			icon_state = "blue_alarm"
 		/*else if(atmosalm && !fire && !eject && !party)
 			icon_state = "bluenew"*/
 		else if(!fire && eject && !party)
-			icon_state = "red"
+			icon_state = "red_alarm"
 		else if(party && !fire && !eject)
 			icon_state = "party"
 		else

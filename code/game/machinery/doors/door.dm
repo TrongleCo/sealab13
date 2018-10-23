@@ -54,6 +54,12 @@
 
 /obj/machinery/door/New()
 	. = ..()
+
+	// name the door after the area if it was left unnamed
+	if(src.name == initial(src.name))
+		if(src.loc && isarea(src.loc.loc))
+			src.name = src.loc.loc.name
+
 	if(density)
 		layer = closed_layer
 		update_heat_protection(get_turf(src))
