@@ -51,7 +51,9 @@
 	var/turf/simulated/W = new N( locate(src.x, src.y, src.z) )
 
 	W.opaque_counter = opaque_counter
+	
 	fluid = old_fluid
+	update_flood_overlay()
 
 	if(ispath(N, /turf/simulated))
 		if(old_fire)
