@@ -32,8 +32,9 @@
 /area/exterior/ocean
 	name = "\improper ocean"
 	icon_state = "ocean"
-	ambience = list('sound/ambience/ambispace.ogg','sound/music/title2.ogg','sound/music/space.ogg','sound/music/main.ogg','sound/music/traitor.ogg')
-	base_turf = /turf/simulated/ocean
+	forced_ambience = list('sound/ambience/ambiocean.ogg')
+	sound_env = OCEAN
+	base_turf = /turf/simulated/ocean/sand
 
 /area/lambda/adm_quarters
 	name = "Administrator's Quarters"
