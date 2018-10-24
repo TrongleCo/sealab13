@@ -79,6 +79,7 @@ There are several things that need to be remembered:
 		update_body()	//Handles updating your mob's icon to reflect their gender/race/complexion etc
 		update_hair()	//Handles updating your hair overlay (used to be update_face, but mouth and
 																			...eyes were merged into update_body)
+		update_shadow() // handles updating the shadow under the mob
 		update_targeted() // Updates the target overlay when someone points a gun at you
 
 >	All of these procs update our overlays_lying and overlays_standing, and then call update_icons() by default.
@@ -139,7 +140,8 @@ Please contact me on #coderbus IRC. ~Carn x
 #define R_HAND_LAYER			25
 #define FIRE_LAYER				26		//If you're on fire
 #define TARGETED_LAYER			27		//BS12: Layer for the target overlay from weapon targeting system
-#define TOTAL_LAYERS			27
+#define SHADOW_LAYER			28
+#define TOTAL_LAYERS			28
 //////////////////////////////////
 
 /mob/living/carbon/human
@@ -151,6 +153,7 @@ Please contact me on #coderbus IRC. ~Carn x
 	lying_prev = lying	//so we don't update overlays for lying/standing unless our stance changes again
 	update_hud()		//TODO: remove the need for this
 	overlays.Cut()
+	update_shadow(0) // disable the under-mob shadow if we're laying down
 
 	var/list/overlays_to_apply = list()
 	if (icon_update)
@@ -193,11 +196,14 @@ Please contact me on #coderbus IRC. ~Carn x
 	overlays = overlays_to_apply
 
 	var/matrix/M = matrix()
+
 	if(lying)
+		pixel_step_size = MOB_STEP_SIZE_CRAWL
 		M.Turn(90)
 		M.Scale(size_multiplier)
-		M.Translate(1,-6)
+		M.Translate(1,-6-default_pixel_y)
 	else
+		pixel_step_size = initial(pixel_step_size)
 		M.Scale(size_multiplier)
 		M.Translate(0, 16*(size_multiplier-1))
 	animate(src, transform = M, time = ANIM_LYING_TIME)
@@ -374,6 +380,25 @@ var/global/list/damage_icon_parts = list()
 	if(update_icons)
 		queue_icon_update()
 
+/mob/living/carbon/human/proc/update_shadow(var/update_icons=1)
+	overlays_standing[SHADOW_LAYER] = null
+
+	if(lying) // dont display shadows if we're laying down
+		if(update_icons)
+			queue_icon_update()
+		return
+	
+	var/image/shadow = overlay_image('icons/effects/effects.dmi', icon_state="mob_shadow");
+
+	shadow.plane = HIDING_MOB_PLANE
+	shadow.layer = MOB_SHADOW_LAYER
+	shadow.pixel_y = -2 // putting it lower than our mob
+
+	overlays_standing[SHADOW_LAYER] = shadow
+
+	if(update_icons)
+		queue_icon_update()
+
 //UNDERWEAR OVERLAY
 
 /mob/living/carbon/human/proc/update_underwear(var/update_icons=1)
@@ -454,6 +479,7 @@ var/global/list/damage_icon_parts = list()
 
 	update_mutations(0)
 	update_body(0)
+	update_shadow(0)
 	update_skin(0)
 	update_underwear(0)
 	update_hair(0)

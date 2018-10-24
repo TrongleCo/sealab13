@@ -6,6 +6,9 @@
 	animate_movement = 2
 	movable_flags = MOVABLE_FLAG_PROXMOVE
 
+	pixel_step_size = MOB_STEP_SIZE
+	pixel_y = MOB_PIXEL_Y
+
 	virtual_mob = /mob/observer/virtual/mob
 
 	movement_handlers = list(

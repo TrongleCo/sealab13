@@ -314,3 +314,7 @@
 #define MOB_INPUT_TEXT "text"
 #define MOB_INPUT_MESSAGE "message"
 #define MOB_INPUT_NUM "num"
+
+#define MOB_STEP_SIZE 		5
+#define MOB_STEP_SIZE_CRAWL 3
+#define MOB_PIXEL_Y 		7
