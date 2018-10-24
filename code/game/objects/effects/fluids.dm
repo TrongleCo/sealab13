@@ -1,6 +1,3 @@
-// since fluids are so prevelant, they get their own var to speed things up
-/turf/var/obj/effect/fluid = null
-
 /obj/effect/fluid
 	name = ""
 	icon = 'icons/effects/liquids.dmi'

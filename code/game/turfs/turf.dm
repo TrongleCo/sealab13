@@ -31,6 +31,7 @@
 
 	var/fluid_can_pass
 	var/obj/effect/flood/flood_object
+	var/obj/effect/fluid/fluid
 	var/fluid_blocked_dirs = 0
 	var/flooded // Whether or not this turf is absolutely flooded ie. a water source.
 
@@ -53,10 +54,11 @@
 
 /turf/proc/update_flood_overlay()
 	if(is_flooded(absolute = TRUE))
+		QDEL_NULL(src.fluid)
 		if(!flood_object)
 			flood_object = new(src)
-	else if(flood_object)
-		QDEL_NULL(flood_object)
+	else
+		QDEL_NULL(src.flood_object)
 
 /turf/Destroy()
 	remove_cleanables()

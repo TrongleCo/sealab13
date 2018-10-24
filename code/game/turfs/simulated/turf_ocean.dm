@@ -10,17 +10,13 @@
 /turf/simulated/ocean/is_plating()
 	return 1
 
-/turf/simulated/ocean/New()
-	. = ..()
-	update_icon()
-
 /turf/simulated/ocean/sand
 	icon_state = "sand0"
 	desc = "Silty seabed"
 	color = COLOR_SAND
 
-/turf/simulated/ocean/sand/update_icon(update_neighbors)
-	. = ..(update_neighbors)
+/turf/simulated/ocean/sand/New()
+	. = ..()
 	icon_state = "sand[rand(0, 7)]"
 
 /turf/simulated/ocean/abyss
