@@ -380,7 +380,7 @@ var/global/list/damage_icon_parts = list()
 	if(update_icons)
 		queue_icon_update()
 
-/mob/living/carbon/human/proc/update_shadow(var/update_icons=1)
+/mob/living/carbon/human/update_shadow(var/update_icons=1)
 	overlays_standing[SHADOW_LAYER] = null
 
 	if(lying) // dont display shadows if we're laying down
@@ -392,7 +392,7 @@ var/global/list/damage_icon_parts = list()
 
 	shadow.plane = HIDING_MOB_PLANE
 	shadow.layer = MOB_SHADOW_LAYER
-	shadow.pixel_y = -2 // putting it lower than our mob
+	shadow.pixel_y = -2+species.shadow_offset_y // putting it lower than our mob
 
 	overlays_standing[SHADOW_LAYER] = shadow
 

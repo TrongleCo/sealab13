@@ -44,9 +44,11 @@
 	var/race_key = 0                          // Used for mob icon cache string.
 	var/icon_template = 'icons/mob/human_races/species/template.dmi' // Used for mob icon generation for non-32x32 species.
 	var/pixel_offset_x = 0                    // Used for offsetting large icons.
-	var/pixel_offset_y = 0                    // Used for offsetting large icons.
+	var/pixel_offset_y = MOB_PIXEL_Y
+	var/shadow_offset_x = 0			  // Used for fine-tuning position of mob shadows
+	var/shadow_offset_y = 0
 	var/antaghud_offset_x = 0                 // As above, but specifically for the antagHUD indicator.
-	var/antaghud_offset_y = 0                 // As above, but specifically for the antagHUD indicator.
+	var/antaghud_offset_y = 0                 
 
 	var/mob_size	= MOB_MEDIUM
 	var/strength    = STR_MEDIUM
