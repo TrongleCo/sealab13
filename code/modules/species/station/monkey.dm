@@ -61,6 +61,10 @@
 		slot_wear_mask_str = list(NORTH = list("x" = 0, "y" = 0), EAST = list("x" = -1, "y" = 0), SOUTH = list("x" = 0, "y" = 0), WEST = list("x" = 1, "y" = 0))
 	)
 
+	// the monkey sprite is smaller than other humanoids, so we shift icon down and the shadow up
+	pixel_offset_y = 0
+	shadow_offset_y = 7
+
 /datum/species/monkey/handle_npc(var/mob/living/carbon/human/H)
 	if(H.stat != CONSCIOUS)
 		return
