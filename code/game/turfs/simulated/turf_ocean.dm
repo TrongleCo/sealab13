@@ -7,6 +7,10 @@
 	opacity = FALSE
 	flooded = TRUE
 
+	light_outer_range = 3
+	light_max_bright = 0.3
+	light_color = COLOR_OCEAN_DAY
+
 /turf/simulated/ocean/is_plating()
 	return 1
 

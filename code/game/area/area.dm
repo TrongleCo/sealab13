@@ -4,11 +4,6 @@
 
 // ===
 /area
-	var/fire = null
-	var/atmos = 1
-	var/atmosalm = 0
-	var/poweralm = 1
-	var/party = null
 	level = null
 	name = "Unknown"
 	icon = 'icons/turf/areas.dmi'
@@ -17,6 +12,13 @@
 	layer = BASE_AREA_LAYER
 	luminosity = 0
 	mouse_opacity = 0
+
+	var/fire = null
+	var/atmos = 1
+	var/atmosalm = 0
+	var/poweralm = 1
+	var/party = null
+
 	var/lightswitch = 1
 
 	var/eject = null
